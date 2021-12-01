@@ -1,14 +1,27 @@
 import React from 'react'
 import { Form, Input, Button } from 'antd';
 import { Row, Col } from 'antd';
-
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../../components/firebase';
+import { Link } from "react-router-dom";
 
 const SignIn = () => {
-    const onFinish = (values: any) => {
+    const onFinish = (values) => {
+        signInWithEmailAndPassword(auth, values.email, values.password)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                console.log(user)
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+            });
         console.log('Success:', values);
     };
 
-    const onFinishFailed = (errorInfo: any) => {
+    const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
     return (
@@ -16,7 +29,7 @@ const SignIn = () => {
             <Row>
                 <Col span={12} offset={4}>
                     <Form
-                        style={{ marginTop:40 }}
+                        style={{ marginTop: 40 }}
                         name="basic"
                         labelCol={{ span: 8 }}
                         wrapperCol={{ span: 16 }}
@@ -49,14 +62,19 @@ const SignIn = () => {
                             <Input.Password />
                         </Form.Item>
 
-                        
+
 
                         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                             <Button type="primary" htmlType="submit">
-                                Submit
+                                Signin
                             </Button>
+                            <Link to="signup"><Button >
+                                Sign up
+                            </Button></Link>
+
                         </Form.Item>
                     </Form>
+
                 </Col>
             </Row>
         </>
