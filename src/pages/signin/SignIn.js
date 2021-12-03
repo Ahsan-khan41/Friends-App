@@ -3,15 +3,17 @@ import { Form, Input, Button } from 'antd';
 import { Row, Col } from 'antd';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../components/firebase';
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
 
 const SignIn = () => {
+    let navigate = useNavigate();
     const onFinish = (values) => {
         signInWithEmailAndPassword(auth, values.email, values.password)
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
                 console.log(user)
+                navigate('/home')
                 // ...
             })
             .catch((error) => {
@@ -26,10 +28,10 @@ const SignIn = () => {
     };
     return (
         <>
-            <Row>
-                <Col span={12} offset={4}>
+            <Row >
+                <Col span={12} offset={4} >
                     <Form
-                        style={{ marginTop: 40 }}
+                        style={{ marginTop: 140 }}
                         name="basic"
                         labelCol={{ span: 8 }}
                         wrapperCol={{ span: 16 }}
@@ -38,13 +40,7 @@ const SignIn = () => {
                         onFinishFailed={onFinishFailed}
                         autoComplete="off"
                     >
-                        <Form.Item
-                            label="Username"
-                            name="username"
-                            rules={[{ required: true, message: 'Please input your username!' }]}
-                        >
-                            <Input />
-                        </Form.Item>
+                        
 
                         <Form.Item
                             label="Email"
@@ -68,7 +64,7 @@ const SignIn = () => {
                             <Button type="primary" htmlType="submit">
                                 Signin
                             </Button>
-                            <Link to="signup"><Button >
+                            <Link to="signup"><Button style={{marginLeft:10}} >
                                 Sign up
                             </Button></Link>
 

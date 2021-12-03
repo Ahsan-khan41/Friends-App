@@ -2,16 +2,19 @@ import React from 'react'
 import { Form, Input, Button } from 'antd';
 import { Row, Col } from 'antd';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from '../../components/firebase';
-import { Link } from "react-router-dom";
+import { auth ,storage} from '../../components/firebase';
+import { Link, useNavigate } from "react-router-dom";
+import ProfileUpload from './ProfileUpload';
 
 const Signup = () => {
+    let navigate = useNavigate();
     const onFinish = (values) => {
         createUserWithEmailAndPassword(auth, values.email, values.password)
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
                 console.log(user)
+                navigate('/')
                 // ...
             })
             .catch((error) => {
@@ -31,7 +34,7 @@ const Signup = () => {
             <Row>
                 <Col span={12} offset={4}>
                     <Form
-                        style={{ marginTop: 40 }}
+                        style={{ marginTop: 140 }}
                         name="basic"
                         labelCol={{ span: 8 }}
                         wrapperCol={{ span: 16 }}
@@ -40,6 +43,13 @@ const Signup = () => {
                         onFinishFailed={onFinishFailed}
                         autoComplete="off"
                     >
+                        <Form.Item
+                            label="Username"
+                            name="username"
+                            rules={[{ required: true, message: 'Please input your username!' }]}
+                        >
+                            <Input />
+                        </Form.Item>
 
 
                         <Form.Item
@@ -57,6 +67,11 @@ const Signup = () => {
                         >
                             <Input.Password />
                         </Form.Item>
+                        <Form.Item label="Upload Profile Pic"
+                            name="uploadPic">
+
+                            <ProfileUpload />
+                        </Form.Item>
 
 
 
@@ -64,7 +79,7 @@ const Signup = () => {
                             <Button type="primary" htmlType="submit">
                                 Sign up
                             </Button>
-                            <Link  to="/"><Button >
+                            <Link to="/"><Button style={{ marginLeft: 10 }}>
                                 Sign in
                             </Button></Link>
                         </Form.Item>
