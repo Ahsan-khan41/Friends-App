@@ -33,12 +33,13 @@ const ProfileUpload = () => {
 
     return (
         <div>
-            <Upload listType="picture"
+            <Upload  listType="picture"
                 accept="image/*"
                 multiple={false}
                 maxCount={1} maxCount={1} {...props}>
-                <Button icon={<UploadOutlined />}>Upload</Button>
-            </Upload>,
+                <Button icon={<UploadOutlined />}>Change Photo</Button>
+            </Upload>
+                <Button icon={<UploadOutlined />}>Remove Photo</Button>
         </div>
     )
 }

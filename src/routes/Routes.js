@@ -7,7 +7,8 @@ import {
 } from "react-router-dom";
 import SignIn from '../pages/signin/SignIn';
 import Signup from '../pages/signup/Signup';
-import Home from '../home/Home';
+import Home from '../pages/home/Home';
+import Settings from '../pages/settings/Settings';
 
 const Routes = () => {
     return (
@@ -16,6 +17,7 @@ const Routes = () => {
                 <Route path="/" element={<SignIn />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/home" element={<Home />} />
+                <Route path="/settings" element={<Settings />} />
 
             </BrowserRoutes>
         </BrowserRouter>

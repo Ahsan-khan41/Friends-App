@@ -2,9 +2,10 @@ import React from 'react'
 import { Form, Input, Button } from 'antd';
 import { Row, Col } from 'antd';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { auth ,storage} from '../../components/firebase';
+import { auth, storage } from '../../components/firebase';
+import { db } from '../../components/firebase';
+import { doc, setDoc } from "firebase/firestore";
 import { Link, useNavigate } from "react-router-dom";
-import ProfileUpload from './ProfileUpload';
 
 const Signup = () => {
     let navigate = useNavigate();
@@ -14,6 +15,13 @@ const Signup = () => {
                 // Signed in 
                 const user = userCredential.user;
                 console.log(user)
+                setDoc(doc(db, "users", user.uid), {
+                    name: values.username,
+                    email: values.email,
+                    uid: user.uid
+                });
+                const uid = user.uid;
+                localStorage.setItem('user', JSON.stringify(user))
                 navigate('/')
                 // ...
             })
@@ -67,12 +75,7 @@ const Signup = () => {
                         >
                             <Input.Password />
                         </Form.Item>
-                        <Form.Item label="Upload Profile Pic"
-                            name="uploadPic">
-
-                            <ProfileUpload />
-                        </Form.Item>
-
+                    
 
 
                         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
