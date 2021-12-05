@@ -3,18 +3,18 @@ import { Typography } from 'antd';
 import { HighlightOutlined, SmileOutlined, SmileFilled } from '@ant-design/icons';
 import './settings.css'
 import { doc, onSnapshot, setDoc } from "firebase/firestore";
-
 import { db } from '../../components/firebase';
 import ProfileUpload from './ProfileUpload';
 const { Paragraph } = Typography;
+
 const SettingCard = () => {
     let userObj = localStorage.getItem('user')
     userObj = JSON.parse(userObj)
 
-    const [name, setName] = useState('');
+    const [name, setName] = useState();
     const [email, setEmail] = useState('');
-    const [updateName, setUpdateName] = useState(name);
-    const [updateEmail, setUpdateEmail] = useState(email);
+    const [updateName, setUpdateName] = useState('a');
+    const [updateEmail, setUpdateEmail] = useState('b');
     console.log(name, email)
     console.log(updateName, updateEmail)
 
@@ -30,20 +30,19 @@ const SettingCard = () => {
         });
 
     }, [])
-
-    // setName(updateName)
-    // setEmail(updateEmail)
-    const memoizedValue = useMemo(() => {
+    
+useEffect(() => {
+    console.log('run')
+    if(name){
         const usersRef = doc(db, 'users', `${userObj.uid}`);
         setDoc(usersRef, { name: updateName, email: updateEmail }, { merge: true });
-        console.log('usememmo')
-    }, [setUpdateName, setUpdateEmail, Paragraph]);
-    // const memoizedCallback = useCallback(
-    //     () => {
+        console.log('usememmonpm ')
+        
 
-    //     },
-    //     [setUpdateName, setUpdateEmail, Paragraph],
-    // );
+    }
+}, [setUpdateName,setUpdateEmail,Paragraph])
+
+
     return (
         <div className='settingCardDiv'>
 

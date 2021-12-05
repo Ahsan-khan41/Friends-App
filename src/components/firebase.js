@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore'
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-// import { Firebase } from '@firebase/app';
+import { getStorage } from "firebase/storage";
 const firebaseConfig = {
     apiKey: "AIzaSyAV2Z81gGjs0lSAA0Iu2ir0vHfJkFJiSfI",
     authDomain: "friends-app-f3d94.firebaseapp.com",
@@ -17,6 +17,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 const stateChange = onAuthStateChanged;
-// const storage = getStorage(app);
+const storage = getStorage(app);
 
-export { firebaseConfig, auth, db, stateChange }
+
+export { firebaseConfig, auth,storage, db, stateChange }
