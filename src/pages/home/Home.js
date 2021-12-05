@@ -4,6 +4,7 @@ import UserCard from './userCard/UserCard'
 import './userCard/userCard.css'
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from '../../components/firebase';
+
 import CurentUserContext from '../../components/context/CurrentUserContext';
 
 
@@ -14,7 +15,7 @@ const Home = () => {
     const currentUserObj = useContext(CurentUserContext)
     const [getUsers, setGetusers] = useState({})
     console.log("Current data: ", getUsers)
-    console.log(currentUserObj.uid)
+    // console.log(currentUserObj.uid)
 
     useEffect(() => {
         const unsub = onSnapshot(doc(db, "users", `${userObj.uid}`), (doc) => {
@@ -26,6 +27,7 @@ const Home = () => {
         });
 
     }, [])
+    
 
 
 
