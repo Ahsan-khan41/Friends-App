@@ -9,6 +9,7 @@ import SignIn from '../pages/signin/SignIn';
 import Signup from '../pages/signup/Signup';
 import Home from '../pages/home/Home';
 import Settings from '../pages/settings/Settings';
+import Posts from '../pages/posts/Posts';
 
 const Routes = () => {
     return (
@@ -18,6 +19,7 @@ const Routes = () => {
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/settings" element={<Settings />} />
+                <Route path="/posts" element={<Posts />} />
 
             </BrowserRoutes>
         </BrowserRouter>

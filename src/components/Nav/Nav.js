@@ -23,6 +23,9 @@ const Nav = () => {
                 <Menu.Item key="settings" icon={<SettingOutlined />}>
                 <Link to='/settings'>Seiitngs</Link>
                 </Menu.Item>
+                <Menu.Item key="posts" icon={<SettingOutlined />}>
+                <Link to='/posts'>Posts</Link>
+                </Menu.Item>
             </Menu>
            
         </div>

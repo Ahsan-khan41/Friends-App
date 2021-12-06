@@ -6,7 +6,9 @@ import { auth } from '../../components/firebase';
 import { Link ,useNavigate} from "react-router-dom";
 
 const SignIn = () => {
+
     let navigate = useNavigate();
+    
     const onFinish = (values) => {
         signInWithEmailAndPassword(auth, values.email, values.password)
             .then((userCredential) => {
