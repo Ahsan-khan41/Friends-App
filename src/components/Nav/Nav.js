@@ -11,8 +11,8 @@ const Nav = () => {
     console.log(current);
 
     const handleClick = e => {
-        console.log('click ', e);
         setCurrent(e.key);
+        console.log('click ', e);
     };
     return (
         <div>

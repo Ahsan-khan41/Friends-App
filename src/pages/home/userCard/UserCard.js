@@ -36,9 +36,9 @@ const UserCard = (props) => {
     }, [])
     return (
         <div>
-            <Card
+            <Card 
                 hoverable
-                style={{ width: 310 }}
+                style={{ width: 310 ,border:'1px solid #ccc'}}
                 cover={<img className='userImg' alt="example" src={imgURL} />}
             >
                 <Meta title={'Name : '+props.name} description={'Email : '+props.email} />

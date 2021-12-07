@@ -15,13 +15,14 @@ const Signup = () => {
         // Signed in
         const user = userCredential.user;
         console.log(user);
+        user.displayName = values.username
         setDoc(doc(db, "users", user.uid), {
           name: values.username,
           email: values.email,
           uid: user.uid,
         });
         const uid = user.uid;
-        localStorage.setItem("user", JSON.stringify(user));
+        
         navigate("/");
         // ...
       })

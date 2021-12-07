@@ -2,12 +2,19 @@ import React, { useEffect, useState } from "react";
 import Nav from "../../components/Nav/Nav";
 import { Card } from "antd";
 import PostModal from "./postModal/PostModal";
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot, updateDoc, doc,arrayUnion } from "firebase/firestore";
+import { EditOutlined, LikeOutlined } from '@ant-design/icons';
+
 import { db } from "../../components/firebase";
+import { Row, Col } from 'antd';
+import './posts.css'
+
 
 const { Meta } = Card;
 
 const Posts = () => {
+  let userObj = localStorage.getItem("user");
+  userObj = JSON.parse(userObj);
   const [postArr, setPostArr] = useState([]);
   //   console.log(postArr[0].adminUid);
 
@@ -22,32 +29,52 @@ const Posts = () => {
     });
   }, []);
 
+  const likeHandler = (element) => {
+    console.log(element.postUid)
+    const post = doc(db, "posts", `${element.postUid}`);
+
+    // Set the "capital" field of the city 'DC'
+    updateDoc(post, {
+      like: arrayUnion('aaaa')
+    });
+  }
+
   return (
+
     <div>
       <Nav />
-      <div style={{display:'flex',flexWrap:'wrap'}}>
+
+      <Row justify='center' gutter={[8, 8]}>
         {postArr.map((elem) => {
           return (
-            <Card
-              hoverable
-              style={{ width: 310, border: "1px solid #ccc" }}
-              cover={
-                <img
+            <Col >
+              <Card
+                actions={[
+                  <LikeOutlined onClick={() => { likeHandler(elem) }} key="setting" />,
+                  <EditOutlined key="edit" />,
+                ]}
+                hoverable
+                style={{ width: 310, border: "1px solid #ccc", margin: '10px 20px' }}
+                cover={
+                  <img
                   className="userImg"
                   alt="example"
-                  src="https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                  src={elem.imgUrl}
+                  />
+                }
+                >
+                <p>Posted By : {elem.adminEmail}</p>
+                <Meta
+                  title={elem.postTitle}
+                  description={ elem.postDescription}
                 />
-              }
-            >
-              <Meta
-                title={"Name : " + elem.postTitle}
-                description={"Email : " + elem.postDescription}
-              />
-              <p>hello</p>
-            </Card>
+              </Card>
+            </Col>
           );
         })}
-      </div>
+
+      </Row>
+
 
       <PostModal />
     </div>

@@ -23,18 +23,7 @@ const ProfileUpload = () => {
 
     const onFinish = (values) => {
         const file = values.upload[0].originFileObj;
-        console.log(file)
-        // let reader = new FileReader();
-        // reader.onload = (e) => {
-        //     const base64 = e.target.result;
-        //     form.resetFields();
-        // };
-        // reader.readAsDataURL(file.originFileObj);
-
-
-        // Points to the root reference
         const storageRef = ref(storage);
-
         // Points to 'images'
         const imagesRef = ref(storageRef, 'images');
 
@@ -42,19 +31,14 @@ const ProfileUpload = () => {
         // Note that you can use variables to create child values
         const fileName = userObj.uid;
         const spaceRef = ref(imagesRef, fileName);
-
         // File path is 'images/space.jpg'
         const path = spaceRef.fullPath;
-
         // File name is 'space.jpg'
         const name = spaceRef.name;
-
         // Points to 'images'
         const imagesRefAgain = spaceRef.parent;
         console.log(imagesRefAgain)
-
         const storageRef1 = ref(storage, userObj.uid);
-
         // 'file' comes from the Blob or File API
         uploadBytes(storageRef1, file).then((snapshot) => {
             console.log('Uploaded a blob or file!');
@@ -97,7 +81,7 @@ const ProfileUpload = () => {
                     label="Upload"
                     valuePropName="fileList"
                     getValueFromEvent={normFile}
-                    
+
                 >
                     <Upload name="logo" listType="picture" accept="image/*" multiple={false}
                         maxCount={1}>

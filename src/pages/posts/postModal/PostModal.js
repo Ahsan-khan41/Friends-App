@@ -18,7 +18,7 @@ const PostModal = () => {
   };
   return (
     <div>
-      <Button style={{position:'fixed',bottom:20,right:20}} type="primary" onClick={showModal}>
+      <Button style={{ position: 'fixed', bottom: 20, right: 20 }} type="primary" onClick={showModal}>
         Create Post
       </Button>
       <Modal
@@ -26,8 +26,13 @@ const PostModal = () => {
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
+        footer={[
+          <Button key="submit" type="primary" onClick={handleOk}>
+            Close
+          </Button>
+        ]}
       >
-        <ModalForm/>
+        <ModalForm />
       </Modal>
     </div>
   );

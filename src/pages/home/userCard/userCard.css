@@ -4,9 +4,12 @@
     align-items: center;
     height: 90vh;
     width: 100%;
+    overflow: hidden;
+    z-index: 5;
 
 }
 
 .userImg{
     height: 340px;
+    z-index: 1;
 }

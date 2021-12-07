@@ -3,18 +3,19 @@ import { Form, Input, Button } from 'antd';
 import { Row, Col } from 'antd';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../components/firebase';
-import { Link ,useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignIn = () => {
 
     let navigate = useNavigate();
-    
+
     const onFinish = (values) => {
         signInWithEmailAndPassword(auth, values.email, values.password)
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
                 console.log(user)
+                localStorage.setItem("user", JSON.stringify(user));
                 navigate('/home')
                 // ...
             })
@@ -42,7 +43,7 @@ const SignIn = () => {
                         onFinishFailed={onFinishFailed}
                         autoComplete="off"
                     >
-                        
+
 
                         <Form.Item
                             label="Email"
@@ -66,7 +67,7 @@ const SignIn = () => {
                             <Button type="primary" htmlType="submit">
                                 Signin
                             </Button>
-                            <Link to="signup"><Button style={{marginLeft:10}} >
+                            <Link to="signup"><Button style={{ marginLeft: 10 }} >
                                 Sign up
                             </Button></Link>
 

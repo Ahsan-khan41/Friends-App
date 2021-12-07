@@ -10,6 +10,8 @@ import CurentUserContext from "./components/context/CurrentUserContext";
 function App() {
   const [firebseAuth, setFirebaseAuth] = useState({ isLoggedIn: false });
   const [currentUser, setCurrentUser] = useState({})
+  console.log(currentUser.displayName) 
+
   useEffect(() => {
 
     onAuthStateChanged(auth, (user) => {
