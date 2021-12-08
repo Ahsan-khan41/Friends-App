@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import Nav from "../../components/Nav/Nav";
 import { Card } from "antd";
 import PostModal from "./postModal/PostModal";
-import { collection, onSnapshot, updateDoc, doc,arrayUnion } from "firebase/firestore";
-import { EditOutlined, LikeOutlined } from '@ant-design/icons';
+import { collection, onSnapshot, updateDoc, doc, arrayUnion, deleteDoc } from "firebase/firestore";
+import {  ref, deleteObject } from "firebase/storage";
+import { EditOutlined, LikeOutlined, DeleteOutlined } from '@ant-design/icons';
+import { Button, Popconfirm } from 'antd';
 
-import { db } from "../../components/firebase";
+
+import { db,storage } from "../../components/firebase";
 import { Row, Col } from 'antd';
 import './posts.css'
 
@@ -39,9 +42,26 @@ const Posts = () => {
     });
   }
 
+
+  const confirm = async (e) => {
+    deleteDoc(doc(db, 'posts', `${e}`));
+    const desertRef = ref(storage, `posts/${e}`);
+
+    // Delete the file
+    deleteObject(desertRef).then(() => {
+      console.log('File deleted successfully')
+    }).catch((error) => {
+      // Uh-oh, an error occurred!
+      console.log(error)
+    });
+    console.log('resolved')
+
+  }
+
   return (
 
     <div>
+
       <Nav />
 
       <Row justify='center' gutter={[8, 8]}>
@@ -52,21 +72,29 @@ const Posts = () => {
                 actions={[
                   <LikeOutlined onClick={() => { likeHandler(elem) }} key="setting" />,
                   <EditOutlined key="edit" />,
+                  // <DeleteOutlined key="delete" onConfirm={confirm} />,
+                  <Popconfirm
+                    title="Are you sure to delete this Post?"
+                    onConfirm={() => { confirm(elem.postUid) }}
+                    onVisibleChange={() => console.log('visible change')}
+                  >
+                    <DeleteOutlined key="delete" onConfirm={confirm} />
+                  </Popconfirm>,
                 ]}
                 hoverable
                 style={{ width: 310, border: "1px solid #ccc", margin: '10px 20px' }}
                 cover={
                   <img
-                  className="userImg"
-                  alt="example"
-                  src={elem.imgUrl}
+                    className="userImg"
+                    alt="example"
+                    src={elem.imgUrl}
                   />
                 }
-                >
+              >
                 <p>Posted By : {elem.adminEmail}</p>
                 <Meta
                   title={elem.postTitle}
-                  description={ elem.postDescription}
+                  description={elem.postDescription}
                 />
               </Card>
             </Col>

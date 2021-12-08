@@ -26,18 +26,18 @@ const ModalForm = () => {
     // Points to 'images/space.jpg'
     // Note that you can use variables to create child values
     const fileName = new Date().getTime();
-    const spaceRef = ref(imagesRef, `${fileName}`);
+    const spaceRef = ref(imagesRef, `posts/${fileName}`);
     // File path is 'images/space.jpg'
     const path = spaceRef.fullPath;
     // File name is 'space.jpg'
     const name = spaceRef.name;
     // Points to 'images'
     const imagesRefAgain = spaceRef.parent;
-    const storageRef1 = ref(storage, `${fileName}`);
+    const storageRef1 = ref(storage, `posts/${fileName}`);
     // 'file' comes from the Blob or File API
     uploadBytes(storageRef1, file).then((snapshot) => {
       //downloading url from firebase storage
-      getDownloadURL(ref(storage, `${fileName}`))
+      getDownloadURL(ref(storage, `posts/${fileName}`))
         .then((url) => {
           // `url` is the download URL for 'images/stars.jpg'
 
