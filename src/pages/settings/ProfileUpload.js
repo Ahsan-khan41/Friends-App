@@ -1,13 +1,16 @@
-import React from 'react'
-import { Upload, Button, message } from 'antd';
+import React,{useContext} from 'react'
+import { Upload, Button } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
-import { Form as AntForm, Input, } from 'antd';
+import { Form as AntForm } from 'antd';
 import { ref, uploadBytes } from "firebase/storage";
 import { storage } from '../../components/firebase';
+import CurentUserContext from '../../components/context/CurrentUserContext';
 
 const ProfileUpload = () => {
-    let userObj = localStorage.getItem('user')
-    userObj = JSON.parse(userObj)
+    const userObj = useContext(CurentUserContext)
+    // let userObj = localStorage.getItem('user')
+    // userObj = JSON.parse(userObj)
+    // console.log(userObj)
 
     const [form] = AntForm.useForm();
     // console.log('Success:', values.upload.file, values.upload.file.name);
@@ -31,10 +34,6 @@ const ProfileUpload = () => {
         // Note that you can use variables to create child values
         const fileName = userObj.uid;
         const spaceRef = ref(imagesRef, fileName);
-        // File path is 'images/space.jpg'
-        const path = spaceRef.fullPath;
-        // File name is 'space.jpg'
-        const name = spaceRef.name;
         // Points to 'images'
         const imagesRefAgain = spaceRef.parent;
         console.log(imagesRefAgain)

@@ -1,39 +1,35 @@
-import logo from "./logo.svg";
+import React from "react";
 import "./App.css";
 import RoutesLoggedIn from "./routes/RoutesLoggedIn.js";
 import RoutesNotLoggedIn from "./routes/RoutesNotLoggedIn";
-import AuthContext from "./components/context/AuthContext";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import { useState, useEffect } from "react";
 import { auth } from "./components/firebase";
 import CurentUserContext from "./components/context/CurrentUserContext";
 
 function App() {
-  const [firebseAuth, setFirebaseAuth] = useState({ isLoggedIn: false });
-  const [currentUser, setCurrentUser] = useState()
+  const [firebaseAuth, setFirebaseAuth] = useState(false);
+  const [currentUser, setCurrentUser] = useState({})
   console.log(currentUser)
+  console.log(firebaseAuth)
 
   useEffect(() => {
 
     onAuthStateChanged(auth, (user) => {
-      setFirebaseAuth({ isLoggedIn: true });
+      setFirebaseAuth(true);
       console.log(user);
       setCurrentUser(user)
-      // const uid = user.uid;
-      // localStorage.setItem('user', JSON.stringify(user))
-      // ...
+
     });
 
   }, [])
 
   return (
-
-    <AuthContext.Provider value={firebseAuth}>
+    <div>
       <CurentUserContext.Provider value={currentUser}>
-        {currentUser ? <RoutesLoggedIn /> : <RoutesNotLoggedIn />}
-
+        {firebaseAuth ? <RoutesLoggedIn /> : <RoutesNotLoggedIn />}
       </CurentUserContext.Provider>
-    </AuthContext.Provider>
+    </div>
   );
 }
 

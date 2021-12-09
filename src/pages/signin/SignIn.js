@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, Input, Button } from 'antd';
 import { Row, Col } from 'antd';
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {  signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../components/firebase';
 import { Link, useNavigate } from "react-router-dom";
 
@@ -23,8 +23,7 @@ const SignIn = () => {
                 // ...
             })
             .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
+      
             });
         console.log('Success:', values);
     };

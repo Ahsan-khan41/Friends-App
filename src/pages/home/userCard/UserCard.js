@@ -1,12 +1,14 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useContext} from 'react'
 import { Card } from 'antd';
 import { ref, getDownloadURL } from "firebase/storage";
 import { storage } from '../../../components/firebase';
+import CurentUserContext from '../../../components/context/CurrentUserContext';
 const { Meta } = Card;
 
 const UserCard = (props) => {
-    let userObj = localStorage.getItem('user')
-    userObj = JSON.parse(userObj)
+    const userObj = useContext(CurentUserContext)
+    // let userObj = localStorage.getItem('user')
+    // userObj = JSON.parse(userObj)
     const [imgURL, setImgURL] = useState('')
     
     useEffect(() => {
@@ -18,7 +20,7 @@ const UserCard = (props) => {
                 const xhr = new XMLHttpRequest();
                 xhr.responseType = 'blob';
                 xhr.onload = (event) => {
-                    const blob = xhr.response;
+                   
                 };
                 xhr.open('GET', url);
                 xhr.send();

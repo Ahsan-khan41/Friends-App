@@ -5,7 +5,7 @@ import PostModal from "./postModal/PostModal";
 import { collection, onSnapshot, updateDoc, doc, arrayUnion, deleteDoc } from "firebase/firestore";
 import {  ref, deleteObject } from "firebase/storage";
 import { EditOutlined, LikeOutlined, DeleteOutlined } from '@ant-design/icons';
-import { Button, Popconfirm } from 'antd';
+import {  Popconfirm } from 'antd';
 
 
 import { db,storage } from "../../components/firebase";
@@ -16,13 +16,12 @@ import './posts.css'
 const { Meta } = Card;
 
 const Posts = () => {
-  let userObj = localStorage.getItem("user");
-  userObj = JSON.parse(userObj);
+  
   const [postArr, setPostArr] = useState([]);
   //   console.log(postArr[0].adminUid);
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, "posts"), (doc) => {
+    onSnapshot(collection(db, "posts"), (doc) => {
       let arr = [];
       doc.forEach((element) => {
         console.log(element.data());
@@ -43,7 +42,7 @@ const Posts = () => {
   }
 
 
-  const confirm = async (e) => {
+  const confirm =  (e) => {
     deleteDoc(doc(db, 'posts', `${e}`));
     const desertRef = ref(storage, `posts/${e}`);
 

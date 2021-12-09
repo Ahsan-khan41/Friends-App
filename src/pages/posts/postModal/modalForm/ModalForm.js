@@ -1,16 +1,18 @@
-import React from "react";
+import React,{useContext} from "react";
 import { Form, Input, Button, Upload, Switch } from "antd";
 import { UploadOutlined } from '@ant-design/icons';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../../../../components/firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../../../components/firebase";
+import CurentUserContext from "../../../../components/context/CurrentUserContext";
 
 const ModalForm = () => {
   const [form] = Form.useForm();
 
-  let userObj = localStorage.getItem("user");
-  userObj = JSON.parse(userObj);
+  const userObj = useContext(CurentUserContext)
+  // let userObj = localStorage.getItem("user");
+  // userObj = JSON.parse(userObj);
 
   // post privacy swith
   function onChange(checked) {
@@ -19,20 +21,9 @@ const ModalForm = () => {
 
   const onFinish = (values) => {
     const file = values.upload[0].originFileObj;
-    const storageRef = ref(storage);
-    // Points to 'images'
-    const imagesRef = ref(storageRef, 'images/posts');
-
-    // Points to 'images/space.jpg'
     // Note that you can use variables to create child values
     const fileName = new Date().getTime();
-    const spaceRef = ref(imagesRef, `posts/${fileName}`);
-    // File path is 'images/space.jpg'
-    const path = spaceRef.fullPath;
-    // File name is 'space.jpg'
-    const name = spaceRef.name;
-    // Points to 'images'
-    const imagesRefAgain = spaceRef.parent;
+  
     const storageRef1 = ref(storage, `posts/${fileName}`);
     // 'file' comes from the Blob or File API
     uploadBytes(storageRef1, file).then((snapshot) => {
@@ -45,7 +36,7 @@ const ModalForm = () => {
           const xhr = new XMLHttpRequest();
           xhr.responseType = 'blob';
           xhr.onload = (event) => {
-            const blob = xhr.response;
+        
           };
           xhr.open('GET', url);
           xhr.send();

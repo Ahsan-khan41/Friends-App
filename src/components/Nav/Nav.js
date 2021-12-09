@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
-import { Menu } from 'antd';
+import { Menu,Button } from 'antd';
 import { HomeOutlined, SettingOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
-import Home from '../../pages/home/Home';
-const { SubMenu } = Menu;
 
 
 const Nav = () => {
@@ -26,6 +24,8 @@ const Nav = () => {
                 <Menu.Item key="posts" icon={<SettingOutlined />}>
                 <Link to='/posts'>Posts</Link>
                 </Menu.Item>
+                
+                
             </Menu>
            
         </div>
