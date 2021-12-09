@@ -29,8 +29,6 @@ const ProfileUpload = () => {
         const storageRef = ref(storage);
         // Points to 'images'
         const imagesRef = ref(storageRef, 'images');
-
-        // Points to 'images/space.jpg'
         // Note that you can use variables to create child values
         const fileName = userObj.uid;
         const spaceRef = ref(imagesRef, fileName);

@@ -24,7 +24,6 @@ const Posts = () => {
     onSnapshot(collection(db, "posts"), (doc) => {
       let arr = [];
       doc.forEach((element) => {
-        console.log(element.data());
         arr.push(element.data());
       });
       setPostArr(arr);
@@ -32,7 +31,6 @@ const Posts = () => {
   }, []);
 
   const likeHandler = (element) => {
-    console.log(element.postUid)
     const post = doc(db, "posts", `${element.postUid}`);
 
     // Set the "capital" field of the city 'DC'
@@ -53,7 +51,6 @@ const Posts = () => {
       // Uh-oh, an error occurred!
       console.log(error)
     });
-    console.log('resolved')
 
   }
 
@@ -64,10 +61,10 @@ const Posts = () => {
       <Nav />
 
       <Row justify='center' gutter={[8, 8]}>
-        {postArr.map((elem) => {
+        {postArr.map((elem,index) => {
           return (
             <Col >
-              <Card
+              <Card key={index}
                 actions={[
                   <LikeOutlined onClick={() => { likeHandler(elem) }} key="setting" />,
                   <EditOutlined key="edit" />,

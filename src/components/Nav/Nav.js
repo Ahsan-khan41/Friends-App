@@ -1,16 +1,14 @@
 import React, { useState } from 'react'
-import { Menu,Button } from 'antd';
+import { Menu } from 'antd';
 import { HomeOutlined, SettingOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 
 
 const Nav = () => {
     const [current, setCurrent] = useState('home')
-    console.log(current);
 
     const handleClick = e => {
         setCurrent(e.key);
-        console.log('click ', e);
     };
     return (
         <div>

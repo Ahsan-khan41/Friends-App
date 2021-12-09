@@ -20,6 +20,7 @@ const Signup = () => {
           name: values.username,
           email: values.email,
           uid: user.uid,
+          img:''
         });
        
         

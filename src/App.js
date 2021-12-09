@@ -10,14 +10,12 @@ import CurentUserContext from "./components/context/CurrentUserContext";
 function App() {
   const [firebaseAuth, setFirebaseAuth] = useState(false);
   const [currentUser, setCurrentUser] = useState({})
-  console.log(currentUser)
-  console.log(firebaseAuth)
+ 
 
   useEffect(() => {
 
     onAuthStateChanged(auth, (user) => {
       setFirebaseAuth(true);
-      console.log(user);
       setCurrentUser(user)
 
     });

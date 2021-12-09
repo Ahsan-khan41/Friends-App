@@ -1,25 +1,21 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Typography } from 'antd';
 import './settings.css'
-import { doc, onSnapshot, setDoc } from "firebase/firestore";
-import { db } from '../../components/firebase';
+import { doc, onSnapshot, setDoc,updateDoc } from "firebase/firestore";
 import { ref, getDownloadURL } from "firebase/storage";
-import { storage } from '../../components/firebase';
+import { storage, db } from '../../components/firebase';
 import CurentUserContext from '../../components/context/CurrentUserContext';
 import ProfileUpload from './ProfileUpload';
 const { Paragraph } = Typography;
 
 const SettingCard = () => {
     const userObj = useContext(CurentUserContext)
-
-
     let uName;
     let uEmail;
     const [name, setName] = useState(uName);
     const [email, setEmail] = useState(uEmail);
     const [updateName, setUpdateName] = useState(name);
     const [updateEmail, setUpdateEmail] = useState(email);
-    console.log(updateName, updateEmail)
 
     const [imgURL, setImgURL] = useState('')
     useEffect(() => {
@@ -31,27 +27,20 @@ const SettingCard = () => {
                 setUpdateEmail(uEmail)
                 setName(doc.data().name)
                 setEmail(doc.data().email)
-                console.log("Current data: ", doc.data())
 
             }
         });
 
-    }, [])
+    }, [userObj])
 
     useEffect(() => {
         getDownloadURL(ref(storage, userObj.uid))
             .then((url) => {
-                // `url` is the download URL for 'images/stars.jpg'
-
-                // This can be downloaded directly:
-                const xhr = new XMLHttpRequest();
-                xhr.responseType = 'blob';
-                xhr.onload = (event) => {
-
-                };
-                xhr.open('GET', url);
-                xhr.send();
-
+                const firestoreUser = doc(db, "users", `${userObj.uid}`);
+                // Set the "users" field 
+                 updateDoc(firestoreUser, {
+                    img: url
+                });
                 setImgURL(url)
             })
             .catch((error) => {
@@ -59,17 +48,20 @@ const SettingCard = () => {
                 console.log(error)
             });
 
-    }, [])
+    }, [userObj])
 
 
 
     if (updateEmail) {
 
-        console.log('effects')
         const usersRef = doc(db, 'users', `${userObj.uid}`);
         setDoc(usersRef, { name: updateName, email: updateEmail }, { merge: true });
-        console.log('usememmonpm ')
     }
+    useEffect(() => {
+        onSnapshot(doc(db, "users", `${userObj.uid}`), (doc) => {
+            setImgURL(doc.data().img)
+        });
+    }, [userObj])
 
 
     return (

@@ -27,12 +27,10 @@ const PostModal = () => {
         onOk={handleOk}
         onCancel={handleCancel}
         footer={[
-          <Button key="submit" type="primary" onClick={handleOk}>
-            Close
-          </Button>
+          
         ]}
       >
-        <ModalForm />
+        <ModalForm closeFunc={handleOk} />
       </Modal>
     </div>
   );

@@ -1,4 +1,4 @@
-import React,{useContext} from "react";
+import React, { useContext } from "react";
 import { Form, Input, Button, Upload, Switch } from "antd";
 import { UploadOutlined } from '@ant-design/icons';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -7,12 +7,10 @@ import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../../../components/firebase";
 import CurentUserContext from "../../../../components/context/CurrentUserContext";
 
-const ModalForm = () => {
+const ModalForm = (props) => {
   const [form] = Form.useForm();
 
   const userObj = useContext(CurentUserContext)
-  // let userObj = localStorage.getItem("user");
-  // userObj = JSON.parse(userObj);
 
   // post privacy swith
   function onChange(checked) {
@@ -20,28 +18,21 @@ const ModalForm = () => {
   }
 
   const onFinish = (values) => {
+    
+    if(values.publicMode === undefined) {
+      values.publicMode = true;
+    };
     const file = values.upload[0].originFileObj;
-    // Note that you can use variables to create child values
+    // generation unique uid for posts
     const fileName = new Date().getTime();
-  
+
     const storageRef1 = ref(storage, `posts/${fileName}`);
-    // 'file' comes from the Blob or File API
     uploadBytes(storageRef1, file).then((snapshot) => {
       //downloading url from firebase storage
       getDownloadURL(ref(storage, `posts/${fileName}`))
         .then((url) => {
-          // `url` is the download URL for 'images/stars.jpg'
 
-          // This can be downloaded directly:
-          const xhr = new XMLHttpRequest();
-          xhr.responseType = 'blob';
-          xhr.onload = (event) => {
-        
-          };
-          xhr.open('GET', url);
-          xhr.send();
           console.log(url)
-
           // setting post data to firestore
           // Add a new document in collection "posts"
           setDoc(doc(db, "posts", `${fileName}`), {
@@ -52,7 +43,7 @@ const ModalForm = () => {
             imgUrl: url,
             like: [],
             postUid: fileName,
-            adminEmail:userObj.email
+            adminEmail: userObj.email
             // adminName:
           });
 
@@ -66,13 +57,6 @@ const ModalForm = () => {
       onReset()
     });
 
-
-
-
-
-
-    console.log("Success:", values);
-
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -80,8 +64,6 @@ const ModalForm = () => {
   };
 
   const normFile = (e) => {
-    console.log('Upload event:', e);
-
     if (Array.isArray(e)) {
       return e;
     }
@@ -156,7 +138,7 @@ const ModalForm = () => {
             span: 16,
           }}
         >
-          <Button type="primary" htmlType="submit">
+          <Button onClick={props.closeFunc} type="primary" htmlType="submit">
             Submit
           </Button>
         </Form.Item>

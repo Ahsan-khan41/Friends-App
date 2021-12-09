@@ -13,12 +13,9 @@ const Home = () => {
     // let userObj = localStorage.getItem('user')
     // userObj = JSON.parse(userObj)
 
-    const currentUser = useContext(CurentUserContext)
-console.log(currentUser)
     
     const [getUsers, setGetusers] = useState({})
-    console.log("Current data: ", getUsers)
-    // console.log(currentUserObj.uid)
+    
 
     useEffect(() => {
          onSnapshot(doc(db, "users", `${userObj.uid}`), (doc) => {
@@ -29,7 +26,7 @@ console.log(currentUser)
             }
         });
 
-    }, [])
+    }, [userObj])
     
 
 
@@ -39,7 +36,7 @@ console.log(currentUser)
         <div>
             <Nav />
             <div className='userCard'>
-                <UserCard name={getUsers.name} email={getUsers.email} />
+                <UserCard name={getUsers.name} email={getUsers.email} img={getUsers.img} />
 
             </div>
         </div>
