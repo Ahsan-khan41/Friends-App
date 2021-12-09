@@ -23,7 +23,7 @@ const Signup = () => {
         });
         const uid = user.uid;
         
-        navigate("/");
+        navigate("/signin");
         // ...
       })
       .catch((error) => {
@@ -84,7 +84,7 @@ const Signup = () => {
               <Button type="primary" htmlType="submit">
                 Sign up
               </Button>
-              <Link to="/">
+              <Link to="/signin">
                 <Button style={{ marginLeft: 10 }}>Sign in</Button>
               </Link>
             </Form.Item>

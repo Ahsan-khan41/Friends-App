@@ -7,23 +7,18 @@ import {
 } from "react-router-dom";
 import SignIn from '../pages/signin/SignIn';
 import Signup from '../pages/signup/Signup';
-import Home from '../pages/home/Home';
-import Settings from '../pages/settings/Settings';
-import Posts from '../pages/posts/Posts';
+import NotFound from '../components/routesComponets/NotFound'
 
-const Routes = () => {
+const RoutesNotLoggedIn = () => {
     return (
         <BrowserRouter>
             <BrowserRoutes>
                 <Route path="/" element={<SignIn />} />
                 <Route path="/signup" element={<Signup />} />
-                <Route path="/home" element={<Home />} />
-                <Route path="/settings" element={<Settings />} />
-                <Route path="/posts" element={<Posts />} />
-
+                <Route path="*" element={<NotFound />} />
             </BrowserRoutes>
         </BrowserRouter>
     )
 }
 
-export default Routes
+export default RoutesNotLoggedIn

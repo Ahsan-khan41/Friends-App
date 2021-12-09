@@ -8,6 +8,7 @@ const UserCard = (props) => {
     let userObj = localStorage.getItem('user')
     userObj = JSON.parse(userObj)
     const [imgURL, setImgURL] = useState('')
+    
     useEffect(() => {
         getDownloadURL(ref(storage, userObj.uid))
             .then((url) => {

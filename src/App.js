@@ -1,6 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
-import Routes from "./routes/Routes";
+import RoutesLoggedIn from "./routes/RoutesLoggedIn.js";
+import RoutesNotLoggedIn from "./routes/RoutesNotLoggedIn";
 import AuthContext from "./components/context/AuthContext";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useState, useEffect } from "react";
@@ -9,8 +10,8 @@ import CurentUserContext from "./components/context/CurrentUserContext";
 
 function App() {
   const [firebseAuth, setFirebaseAuth] = useState({ isLoggedIn: false });
-  const [currentUser, setCurrentUser] = useState({})
-  console.log(currentUser.displayName) 
+  const [currentUser, setCurrentUser] = useState()
+  console.log(currentUser)
 
   useEffect(() => {
 
@@ -29,7 +30,8 @@ function App() {
 
     <AuthContext.Provider value={firebseAuth}>
       <CurentUserContext.Provider value={currentUser}>
-        <Routes />
+        {currentUser ? <RoutesLoggedIn /> : <RoutesNotLoggedIn />}
+
       </CurentUserContext.Provider>
     </AuthContext.Provider>
   );

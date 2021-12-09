@@ -16,7 +16,7 @@ const SignIn = () => {
                 const user = userCredential.user;
                 console.log(user)
                 localStorage.setItem("user", JSON.stringify(user));
-                navigate('/home')
+                navigate('/')
                 // ...
             })
             .catch((error) => {
@@ -67,7 +67,7 @@ const SignIn = () => {
                             <Button type="primary" htmlType="submit">
                                 Signin
                             </Button>
-                            <Link to="signup"><Button style={{ marginLeft: 10 }} >
+                            <Link to="/signup"><Button style={{ marginLeft: 10 }} >
                                 Sign up
                             </Button></Link>
 

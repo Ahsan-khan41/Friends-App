@@ -18,7 +18,7 @@ const Nav = () => {
         <div>
             <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal"   >
                 <Menu.Item key="home" icon={<HomeOutlined />}>
-                   <Link to='/home'>Home</Link>
+                   <Link to='/'>Home</Link>
                 </Menu.Item>
                 <Menu.Item key="settings" icon={<SettingOutlined />}>
                 <Link to='/settings'>Seiitngs</Link>
