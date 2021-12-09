@@ -1,14 +1,19 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Typography } from 'antd';
 import './settings.css'
-import { doc, onSnapshot, setDoc,updateDoc } from "firebase/firestore";
+import { doc, onSnapshot, setDoc, updateDoc } from "firebase/firestore";
 import { ref, getDownloadURL } from "firebase/storage";
-import { storage, db } from '../../components/firebase';
+import { storage, db,auth } from '../../components/firebase';
+import {  signOut } from "firebase/auth";
+import {  useNavigate } from "react-router-dom";
 import CurentUserContext from '../../components/context/CurrentUserContext';
 import ProfileUpload from './ProfileUpload';
+import { Button } from 'antd';
+
 const { Paragraph } = Typography;
 
 const SettingCard = () => {
+    let navigate = useNavigate();
     const userObj = useContext(CurentUserContext)
     let uName;
     let uEmail;
@@ -38,7 +43,7 @@ const SettingCard = () => {
             .then((url) => {
                 const firestoreUser = doc(db, "users", `${userObj.uid}`);
                 // Set the "users" field 
-                 updateDoc(firestoreUser, {
+                updateDoc(firestoreUser, {
                     img: url
                 });
                 setImgURL(url)
@@ -63,6 +68,14 @@ const SettingCard = () => {
         });
     }, [userObj])
 
+    const logout = () => {
+        signOut(auth).then(() => {
+            setImgURL(imgURL)
+        }).catch((error) => {
+            // An error happened.
+        });
+    }
+
 
     return (
         <div className='settingCardDiv'>
@@ -77,6 +90,8 @@ const SettingCard = () => {
                     Email  : <Paragraph editable={{ onChange: setUpdateEmail }}>{updateEmail}</Paragraph>
                 </div>
             </div>
+
+            <Button danger onClick={logout}>Logout</Button>
 
         </div>
     )

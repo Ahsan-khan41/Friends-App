@@ -14,7 +14,7 @@ const RoutesNotLoggedIn = () => {
             <BrowserRoutes>
                 <Route path="/" element={<SignIn />} />
                 <Route path="/signup" element={<Signup />} />
-                <Route path="*" element={<NotFound />} />
+                <Route path="*" element={<SignIn />} />
             </BrowserRoutes>
         </BrowserRouter>
     )
