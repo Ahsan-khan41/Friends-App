@@ -16,7 +16,10 @@ const SignIn = () => {
                 const user = userCredential.user;
                 console.log(user)
                 localStorage.setItem("user", JSON.stringify(user));
-                navigate('/')
+                setTimeout(() => {
+                    
+                    navigate('/')
+                }, 1200);
                 // ...
             })
             .catch((error) => {
