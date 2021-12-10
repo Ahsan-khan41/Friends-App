@@ -1,0 +1,30 @@
+
+
+.background-img{
+   
+    object-fit: none; /* Do not scale the image */
+    object-position: center; /* Center the image within the element */
+    height: 400px !important;
+    border-radius: 0px 0px 10px 10px !important;
+    
+    
+}
+
+.profile-img{
+    object-fit: cover; /* Do not scale the image */
+    object-position: center; /* Center the image within the element */
+    height: 180px !important;
+    width: 180px !important;
+    border-radius: 50%;
+    position: relative;
+    top: -70px;
+    left: 130px;
+    border: 4px solid rgb(235, 235, 235);
+}
+
+.user-name{
+    position: relative;
+    top: -180px;
+    left: 400px;
+    width: 100%;
+}

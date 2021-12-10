@@ -10,6 +10,7 @@ import Settings from '../pages/settings/Settings';
 import Posts from '../pages/posts/Posts';
 import AlreadyLoggedIn from '../components/routesComponets/AlreadyLoggedIn';
 import NotFound from '../components/routesComponets/NotFound'
+import NewHome from '../pages/home/userCard/NewHome';
 
 const RoutesLoggedIn = () => {
   
@@ -23,6 +24,7 @@ const RoutesLoggedIn = () => {
                         <Route path="/" element={<Home />} />
                         <Route path="/settings" element={<Settings />} />
                         <Route path="/posts" element={<Posts />} />
+                        <Route path="/newhome" element={<NewHome />} />
                         <Route path="/signup" element={<AlreadyLoggedIn />} />
                         <Route path="*" element={<NotFound />} />
                     </BrowserRoutes>
