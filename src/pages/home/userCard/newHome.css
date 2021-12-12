@@ -1,30 +1,57 @@
+* {
+    /* background-color: #ccc; */
 
+}
 
-.background-img{
-   
-    object-fit: none; /* Do not scale the image */
-    object-position: center; /* Center the image within the element */
-    height: 400px !important;
+.background-img {
+
+    object-fit: none;
+    /* Do not scale the image */
+    object-position: center;
+    /* Center the image within the element */
+    height: 350px !important;
     border-radius: 0px 0px 10px 10px !important;
-    
-    
+
+
+
 }
 
-.profile-img{
-    object-fit: cover; /* Do not scale the image */
-    object-position: center; /* Center the image within the element */
-    height: 180px !important;
-    width: 180px !important;
-    border-radius: 50%;
-    position: relative;
-    top: -70px;
-    left: 130px;
-    border: 4px solid rgb(235, 235, 235);
-}
-
-.user-name{
-    position: relative;
-    top: -180px;
-    left: 400px;
+.parentDiv {
+    /* background-color: rgb(243, 243, 243); */
+    height: 80vh;
+    position: absolute;
     width: 100%;
+}
+
+.profile-div {
+    display: flex;
+    /* justify-content: center; */
+    position: relative;
+    left: 270px;
+    bottom: 50px;
+    box-sizing: border-box;
+    /* background-color: rgba(170, 190, 190, 0.212); */
+    width: 700px;
+}
+
+.profile-img {
+    object-fit: cover;
+    /* Do not scale the image */
+    object-position: center;
+    /* Center the image within the element */
+    height: 200px !important;
+    width: 200px !important;
+    border-radius: 50%;
+    /* position: relative; */
+    /* top: -70px; */
+    /* left: 280px; */
+    /* border: 4px solid rgb(235, 235, 235); */
+}
+
+.user-name {
+    /* position: relative;
+    top: -180px; */
+    /* left: 600px; */
+    /* width: 100%; */
+    margin: 75px 0px 0px 30px
 }

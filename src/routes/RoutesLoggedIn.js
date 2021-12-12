@@ -13,23 +13,24 @@ import NotFound from '../components/routesComponets/NotFound'
 import NewHome from '../pages/home/userCard/NewHome';
 
 const RoutesLoggedIn = () => {
-  
+
 
 
 
     return (
-        
-                <BrowserRouter>
-                    <BrowserRoutes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/settings" element={<Settings />} />
-                        <Route path="/posts" element={<Posts />} />
-                        <Route path="/newhome" element={<NewHome />} />
-                        <Route path="/signup" element={<AlreadyLoggedIn />} />
-                        <Route path="*" element={<NotFound />} />
-                    </BrowserRoutes>
-                </BrowserRouter>
-           
+
+        <BrowserRouter>
+            <BrowserRoutes>
+                <Route path="/" element={<Home />} />
+                <Route path="/settings" element={<Settings />} />
+                <Route path="/posts" element={<Posts />} />
+                <Route path="/newhome" element={<NewHome />} />
+                <Route path="/signup" element={<AlreadyLoggedIn />} />
+                <Route path="/users/:user" element={<NewHome />} />
+                <Route path="*" element={<NotFound />} />
+            </BrowserRoutes>
+        </BrowserRouter>
+
     )
 }
 
