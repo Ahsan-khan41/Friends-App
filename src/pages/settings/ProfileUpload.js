@@ -26,15 +26,7 @@ const ProfileUpload = () => {
 
     const onFinish = (values) => {
         const file = values.upload[0].originFileObj;
-        const storageRef = ref(storage);
-        // Points to 'images'
-        const imagesRef = ref(storageRef, 'images');
-        // Note that you can use variables to create child values
-        const fileName = userObj.uid;
-        const spaceRef = ref(imagesRef, fileName);
-        // Points to 'images'
-        const imagesRefAgain = spaceRef.parent;
-        console.log(imagesRefAgain)
+        
         const storageRef1 = ref(storage, userObj.uid);
         // 'file' comes from the Blob or File API
         uploadBytes(storageRef1, file).then((snapshot) => {
