@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Menu } from 'antd';
 import { HomeOutlined, SettingOutlined } from '@ant-design/icons';
-import { Link ,useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Select } from 'antd';
 import CurentUserContext from '../context/CurrentUserContext';
 import { collection, getDocs } from "firebase/firestore";
@@ -30,11 +30,10 @@ const Nav = () => {
         querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
             userArr.push(doc.data().name)
-            console.log(doc.id, " => ", doc.data());
+            // console.log(doc.id, " => ", doc.data());
         });
         setUsers(userArr)
     }, [])
-    console.log(users)
 
     function handleChange(value) {
         console.log(`selected ${users[value]}`);
@@ -44,7 +43,7 @@ const Nav = () => {
         return <Option key={i} >{elem}</Option>
     })
     // const children = ['jj', '11']
-  
+
     return (
         <div>
             <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal"   >
@@ -52,16 +51,17 @@ const Nav = () => {
                     <Link to='/'>Home</Link>
                 </Menu.Item>
                 <Menu.Item key="settings" icon={<SettingOutlined />}>
-                    <Link to='/settings'>Seiitngs</Link>
+                    <Link to='/settings'>Settings</Link>
+                </Menu.Item>
+                <Menu.Item key="myposts" icon={<SettingOutlined />}>
+                    <Link to='/myposts'>My Posts</Link>
                 </Menu.Item>
                 <Menu.Item key="posts" icon={<SettingOutlined />}>
                     <Link to='/posts'>Posts</Link>
                 </Menu.Item>
-                <Menu.Item key="newhome" icon={<SettingOutlined />}>
-                    <Link to='/users/111'>New Home</Link>
-                </Menu.Item>
                 <Menu.Item >
-                    <Select showSearch
+                    <Select showSearch={true}
+                    showArrow={false}
                         defaultActiveFirstOption={false}
                         style={{ width: '300px' }}
                         onChange={handleChange}

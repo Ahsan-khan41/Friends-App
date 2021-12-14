@@ -18,7 +18,7 @@
 
 .parentDiv {
     /* background-color: rgb(243, 243, 243); */
-    height: 80vh;
+    height: 70vh;
     position: absolute;
     width: 100%;
 }
@@ -31,7 +31,7 @@
     bottom: 50px;
     box-sizing: border-box;
     /* background-color: rgba(170, 190, 190, 0.212); */
-    width: 700px;
+    width: 600px;
 }
 
 .profile-img {
@@ -54,4 +54,8 @@
     /* left: 600px; */
     /* width: 100%; */
     margin: 75px 0px 0px 30px
+}
+
+.emailHead{
+    /* margin: 0 !important; */
 }
