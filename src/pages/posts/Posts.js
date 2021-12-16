@@ -3,12 +3,12 @@ import Nav from "../../components/Nav/Nav";
 import { Card } from "antd";
 import PostModal from "./postModal/PostModal";
 import { collection, onSnapshot, updateDoc, doc, arrayUnion, deleteDoc } from "firebase/firestore";
-import {  ref, deleteObject } from "firebase/storage";
+import { ref, deleteObject } from "firebase/storage";
 import { EditOutlined, LikeOutlined, DeleteOutlined } from '@ant-design/icons';
-import {  Popconfirm } from 'antd';
+import { Popconfirm } from 'antd';
 
 
-import { db,storage } from "../../components/firebase";
+import { db, storage } from "../../components/firebase";
 import { Row, Col } from 'antd';
 import './posts.css'
 
@@ -16,7 +16,7 @@ import './posts.css'
 const { Meta } = Card;
 
 const Posts = () => {
-  
+
   const [postArr, setPostArr] = useState([]);
   //   console.log(postArr[0].adminUid);
 
@@ -40,7 +40,7 @@ const Posts = () => {
   }
 
 
-  const confirm =  (e) => {
+  const confirm = (e) => {
     deleteDoc(doc(db, 'posts', `${e}`));
     const desertRef = ref(storage, `posts/${e}`);
 
@@ -56,48 +56,50 @@ const Posts = () => {
 
   return (
 
-    <div>
+    <div className="post-div">
 
-      <Nav />
+      {/* <Nav /> */}
 
-      <Row justify='center' gutter={[8, 8]}>
-        {postArr.map((elem,index) => {
-          return (
-            <Col >
-              <Card key={index}
-                actions={[
-                  <LikeOutlined onClick={() => { likeHandler(elem) }} key="setting" />,
-                  <EditOutlined key="edit" />,
-                  // <DeleteOutlined key="delete" onConfirm={confirm} />,
-                  <Popconfirm
-                    title="Are you sure to delete this Post?"
-                    onConfirm={() => { confirm(elem.postUid) }}
-                    onVisibleChange={() => console.log('visible change')}
-                  >
-                    <DeleteOutlined key="delete" onConfirm={confirm} />
-                  </Popconfirm>,
-                ]}
-                hoverable
-                style={{ width: 310, border: "1px solid #ccc", margin: '10px 20px' }}
-                cover={
-                  <img
-                    className="userImg"
-                    alt="example"
-                    src={elem.imgUrl}
-                  />
-                }
+
+      {postArr.map((elem, index) => {
+        return (
+
+          <Card key={index}
+            className="post-card"
+            actions={[
+              <LikeOutlined onClick={() => { likeHandler(elem) }} key="setting" />,
+              <EditOutlined key="edit" />,
+              // <DeleteOutlined key="delete" onConfirm={confirm} />,
+              <Popconfirm
+                title="Are you sure to delete this Post?"
+                onConfirm={() => { confirm(elem.postUid) }}
+                onVisibleChange={() => console.log('visible change')}
               >
-                <p>Posted By : {elem.adminEmail}</p>
-                <Meta
-                  title={elem.postTitle}
+                <DeleteOutlined key="delete" onConfirm={confirm} />
+              </Popconfirm>,
+            ]}
+            hoverable
+            style={{ border: "1px solid #ccc", margin: '10px 20px' }}
+            cover={
+              <img
+                className="post-img"
+                alt="example"
+                src={elem.imgUrl}
+              />
+            }
+          >
+            <h4>Posted By : {elem.adminEmail}</h4>
+            <p></p>
+            <Meta
+            title={elem.postTitle}
                   description={elem.postDescription}
                 />
-              </Card>
-            </Col>
-          );
-        })}
+          </Card>
 
-      </Row>
+        );
+      })}
+
+
 
 
       <PostModal />

@@ -70,7 +70,9 @@ const SettingCard = () => {
 
     const logout = () => {
         signOut(auth).then(() => {
-            setImgURL(imgURL)
+            // setImgURL(imgURL)
+            navigate('/')
+            window.location.reload(true);
         }).catch((error) => {
             // An error happened.
         });

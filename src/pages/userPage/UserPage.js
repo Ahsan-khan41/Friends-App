@@ -12,11 +12,11 @@ const { Title } = Typography;
 
 const UserPage = () => {
     let params = useParams();
-    // console.log(params)
+    console.log(params)
     const [userPeram, setUserPeram] = useState(params)
     // console.log(userPeram);
     useEffect(() => {
-        const q = query(collection(db, "users"), where("name", "==", `${params.user}`));
+        const q = query(collection(db, "users"), where("uid", "==", `${params.user}`));
         onSnapshot(q, (querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 setUserPeram(doc.data());

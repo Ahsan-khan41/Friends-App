@@ -1,8 +1,17 @@
-
-
-.userImg{
-    width: 296px !important;
-    height: 340px;
+.post-img {
+    width: 592px !important;
+    height: 411px !important;
+    border-radius: 10px !important;
     /* margin-bottom: 20px !important; */
     margin: 5px auto !important;
+    object-fit: cover;
+    object-position: center;
+}
+
+.post-card {
+    /* background-color: aqua !important; */
+    width: 600px !important;
+    border-radius: 11px !important;
+    border: 1px solid #ccc !important;
+    height: 100% !important;
 }
