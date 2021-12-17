@@ -1,4 +1,5 @@
 .post-img {
+    
     width: 592px !important;
     height: 411px !important;
     border-radius: 10px !important;
@@ -9,7 +10,7 @@
 }
 
 .post-card {
-    /* background-color: aqua !important; */
+    /* background-color: rgb(228, 228, 228) !important; */
     width: 600px !important;
     border-radius: 11px !important;
     border: 1px solid #ccc !important;

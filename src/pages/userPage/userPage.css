@@ -25,13 +25,12 @@
 
 .profile-div {
     display: flex;
-    /* justify-content: center; */
+    justify-content: center;
     position: relative;
-    left: 270px;
-    bottom: 50px;
-    box-sizing: border-box;
+    bottom: 180px;
+    /* box-sizing: border-box; */
     /* background-color: rgba(170, 190, 190, 0.212); */
-    width: 600px;
+    /* width: 600px; */
 }
 
 .profile-img {
