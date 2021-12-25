@@ -1,14 +1,20 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, Button } from "antd";
 import ModalForm from "./modalForm/ModalForm";
 
-const PostModal = () => {
+const PostModal = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
-
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
+console.log(isModalVisible);
+// setIsModalVisible(props.value)
+const showModal = () => {
+  setIsModalVisible(true);
+  
+};
+useEffect(() => {
+  
+ 
+  
 
   const handleOk = () => {
     setIsModalVisible(false);

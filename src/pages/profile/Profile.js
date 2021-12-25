@@ -10,11 +10,28 @@ import { Typography } from "antd";
 // import UserTabs from "../userPage/userTabs/UserTabs";
 import ProfileTabs from './profileTabs/ProfileTabs'
 import CurentUserContext from "../../components/context/CurrentUserContext";
-import { Modal, Button } from 'antd';
+import { Modal, Button, Avatar, Popover } from 'antd';
+import { signOut } from "firebase/auth";
+import { auth } from "../../components/firebase";
+import { Link, useNavigate } from "react-router-dom";
 
 const { Title } = Typography;
 
 const Profile = () => {
+    let navigate = useNavigate();
+    const [avatar, setAvatar] = useState(false)
+    const hide = () => {
+        signOut(auth).then(() => {
+            navigate("/");
+            window.location.reload(true);
+        }).catch((error) => {
+            // An error happened.
+        });
+        setAvatar(false)
+    };
+    const handleVisibleChange = visible => {
+        setAvatar(visible)
+    };
     //modal code
     const [visiblep, setVisiblep] = useState(false)
     const [visibleb, setVisibleb] = useState(false)
@@ -93,7 +110,16 @@ const Profile = () => {
                     </Title>
                 </div>
                 <ProfileTabs user={userProfile} />
-
+            </div>
+            <div style={{ position: 'fixed', bottom: 20, right: 20, cursor: 'pointer', border: '4px solid #ccc', borderRadius: '50%' }}>
+                <Popover
+                    content={<a onClick={hide}>Logout</a>}
+                    trigger="click"
+                    visible={avatar}
+                    onVisibleChange={handleVisibleChange}
+                >
+                    <Avatar src={userProfile.profile} size={64} />
+                </Popover>
             </div>
         </div>
     );

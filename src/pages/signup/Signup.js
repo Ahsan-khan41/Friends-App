@@ -116,10 +116,10 @@ const Signup = () => {
               name="status"
               rules={[{ required: true, message: "Please input your Date of Birth!" }]}
             >
-              <Select defaultValue="lucy" style={{ width: 120 }} >
-                <Option value="jack">Male</Option>
-                <Option value="lucy">Female</Option>
-                <Option value="Yiminghe">Other</Option>
+              <Select defaultValue="Male" style={{ width: 120 }} >
+                <Option value="Male">Male</Option>
+                <Option value="Fenale">Female</Option>
+                <Option value="Other">Other</Option>
               </Select>
             </Form.Item>
 

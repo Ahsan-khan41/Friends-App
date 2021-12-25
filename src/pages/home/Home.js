@@ -17,6 +17,7 @@ const Home = () => {
   // userObj = JSON.parse(userObj)
 
   const [getUsers, setGetusers] = useState({});
+  
 
   useEffect(() => {
     onSnapshot(doc(db, "users", `${userObj.uid}`), (doc) => {
@@ -27,22 +28,14 @@ const Home = () => {
     });
   }, [userObj]);
 
-  const createPostF = (showModal)=>{
-console.log(showModal);
-  }
-
+ 
   return (
-    // <div>
-    //     {/* <div className='userCard'>
-    //         <UserCard name={getUsers.name} email={getUsers.email} img={getUsers.img} />
-
-    //     </div> */}
-    // </div>
+    
     <div>
       <Nav />
 
       <div className="post-div">
-        <div onClick={createPostF} className="create-post-div">
+        <div  className="create-post-div">
           <Input placeholder="What's on your mind ?" className="post-input" />
           <Divider />
           <div className="buttons-div">
@@ -56,7 +49,7 @@ console.log(showModal);
         </div>
         <Posts />
       </div>
-      <PostModal />
+      <PostModal  />
       
     </div>
   );

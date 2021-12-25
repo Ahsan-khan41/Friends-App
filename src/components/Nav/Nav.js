@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Menu } from 'antd';
-import { HomeFilled, SettingFilled, UsergroupDeleteOutlined, ContainerOutlined ,UserOutlined} from '@ant-design/icons';
+import { Menu, Affix } from 'antd';
+import { HomeFilled, SettingFilled, UsergroupDeleteOutlined, ContainerOutlined, UserOutlined } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { Select } from 'antd';
-import CurentUserContext from '../context/CurrentUserContext';
 import { collection, getDocs } from "firebase/firestore";
 import { db } from '../firebase';
 import logo from './logo.svg'
@@ -14,7 +13,6 @@ const { Option } = Select;
 
 
 const Nav = () => {
-    const userObj = useContext(CurentUserContext)
     const [users, setUsers] = useState([])
     const [current, setCurrent] = useState('home')
     // console.log(users)
@@ -48,9 +46,11 @@ const Nav = () => {
 
     return (
         <div>
+            <Affix >
             <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal" className='menu-nav' style={{ height: 55 }}   >
                 <Menu.Item >
                     <img src={logo} />
+                    <Link to='/'></Link>
                 </Menu.Item>
                 <Menu.Item >
                     <Select showSearch={true}
@@ -69,12 +69,15 @@ const Nav = () => {
                 <Menu.Item key="home" icon={<HomeFilled style={{ fontSize: 25, width: 70 }} />}>
                     <Link to='/'></Link>
                 </Menu.Item>
-                <Menu.Item key="user" icon={<UserOutlined  style={{ fontSize: 25, width: 70 }} />}>
+                <Menu.Item key="user" icon={<UserOutlined style={{ fontSize: 25, width: 70 }} />}>
                     <Link to='/user'></Link>
                 </Menu.Item>
-                
+
 
             </Menu>
+            </Affix>,
+
+            
 
         </div>
     )
