@@ -1,12 +1,14 @@
-import React,{useContext} from 'react'
+import React,{useContext,useState} from 'react'
 import { Upload, Button } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { Form as AntForm } from 'antd';
-import { ref, uploadBytes } from "firebase/storage";
-import { storage } from '../../components/firebase';
+import {  ref, getDownloadURL,uploadBytes } from "firebase/storage";
+import { doc, onSnapshot, setDoc, updateDoc } from "firebase/firestore";
+import { db,storage } from '../../components/firebase';
 import CurentUserContext from '../../components/context/CurrentUserContext';
 
-const ProfileUpload = () => {
+const ProfileUpload = (props) => {
+    console.log(props.pic);
     const userObj = useContext(CurentUserContext)
     // let userObj = localStorage.getItem('user')
     // userObj = JSON.parse(userObj)
@@ -23,14 +25,31 @@ const ProfileUpload = () => {
     const buttonItemLayout = {
         wrapperCol: { span: 14, offset: 4 },
     };
+   const pic = props.pic;
 
     const onFinish = (values) => {
         const file = values.upload[0].originFileObj;
         
-        const storageRef1 = ref(storage, userObj.uid);
+        const storageRef1 = ref(storage,`user/${userObj.uid}/${pic}`);
         // 'file' comes from the Blob or File API
         uploadBytes(storageRef1, file).then((snapshot) => {
-            console.log('Uploaded a blob or file!');
+            
+                getDownloadURL(ref(storage, `user/${userObj.uid}/${pic}`))
+                    .then((url) => {
+                        const firestoreUser = doc(db, "users", `${userObj.uid}`);
+                        // Set the "users" field 
+                        updateDoc(firestoreUser, {
+                            [pic]: url
+                        });
+                        
+                    })
+                    .catch((error) => {
+                        // Handle any errors
+                        console.log(error)
+                    });
+        
+            
+        
             onReset()
         });
 
@@ -57,7 +76,7 @@ const ProfileUpload = () => {
 
     return (
         <div>
-
+            
             <AntForm
                 {...formItemLayout}
                 layout="horizontal"
@@ -67,7 +86,7 @@ const ProfileUpload = () => {
             >
                 <AntForm.Item
                     name="upload"
-                    label="Upload"
+                    label="Change :"
                     valuePropName="fileList"
                     getValueFromEvent={normFile}
 
@@ -78,7 +97,7 @@ const ProfileUpload = () => {
                     </Upload>
                 </AntForm.Item>
                 <AntForm.Item {...buttonItemLayout}>
-                    <Button type="primary" htmlType="submit" style={{ marginRight: '10px' }}>Submit</Button>
+                    <Button onClick={props.closeFunc} type="primary" htmlType="submit" style={{ marginRight: '10px' }}>Submit</Button>
 
 
                 </AntForm.Item>

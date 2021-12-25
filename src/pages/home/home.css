@@ -40,5 +40,5 @@
   align-items: center;
   flex-direction: column;
   background: rgb(235,233,218);
-background: linear-gradient(90deg, rgba(235,233,218,1) 0%, rgba(200,242,184,1) 42%, rgb(226, 222, 236) 79%);
+background: linear-gradient(90deg, rgba(235,233,218,1) 0%, rgb(207, 216, 204) 42%, rgb(240, 239, 243) 79%);
 }

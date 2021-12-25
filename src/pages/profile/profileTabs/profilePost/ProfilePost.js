@@ -1,18 +1,18 @@
-import React, { useState, useEffect,useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Row, Col } from 'antd';
-import { Card,Badge } from "antd";
-import { EditOutlined, LikeOutlined, ShareAltOutlined } from '@ant-design/icons';
-import { collection, query, where, onSnapshot, doc, arrayUnion, deleteDoc ,updateDoc} from "firebase/firestore";
+import { Card, Badge } from "antd";
+import { EditOutlined, LikeOutlined, DeleteOutlined } from '@ant-design/icons';
+import { collection, query, where, onSnapshot, doc, arrayUnion, deleteDoc, updateDoc } from "firebase/firestore";
 import { ref, deleteObject } from "firebase/storage";
-import './user-post.css'
+import './profile-post.css'
 import { Popconfirm } from 'antd';
 import { db, storage } from '../../../../components/firebase';
 import CurentUserContext from '../../../../components/context/CurrentUserContext';
 
 const { Meta } = Card;
 
-const UserPosts = (props) => {
-  const userObj = useContext(CurentUserContext)
+const ProfilePost = (props) => {
+    const userObj = useContext(CurentUserContext)
 
     const [postArr, setPostArr] = useState([]);
     console.log(postArr, props.user);
@@ -63,7 +63,13 @@ const UserPosts = (props) => {
                                 <LikeOutlined style={{ width: 32 }} onClick={() => { likeHandler(elem) }} key="setting" />
                             </Badge>,
                             <EditOutlined key="edit" />,
-                            <ShareAltOutlined />
+                            <Popconfirm
+                                title="Are you sure to delete this Post?"
+                                onConfirm={() => { confirm(elem.postUid) }}
+                                onVisibleChange={() => console.log('visible change')}
+                            >
+                                <DeleteOutlined key="delete" onConfirm={confirm} />
+                            </Popconfirm>,
 
                         ]}
                         hoverable
@@ -89,4 +95,4 @@ const UserPosts = (props) => {
     )
 }
 
-export default UserPosts
+export default ProfilePost

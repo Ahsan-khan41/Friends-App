@@ -72,15 +72,7 @@ const Nav = () => {
                 <Menu.Item key="user" icon={<UserOutlined  style={{ fontSize: 25, width: 70 }} />}>
                     <Link to='/user'></Link>
                 </Menu.Item>
-                <Menu.Item key="settings" icon={<SettingFilled style={{ fontSize: 25, width: 70 }} />}>
-                    <Link to='/settings'></Link>
-                </Menu.Item>
-                <Menu.Item key="myposts" icon={<ContainerOutlined style={{ fontSize: 25, width: 70 }} />}>
-                    <Link to='/myposts'></Link>
-                </Menu.Item>
-                <Menu.Item key="posts" icon={<UsergroupDeleteOutlined style={{ fontSize: 25, width: 70 }} />}>
-                    <Link to='/posts'></Link>
-                </Menu.Item>
+                
 
             </Menu>
 
