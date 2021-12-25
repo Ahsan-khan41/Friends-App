@@ -8,6 +8,7 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../../components/firebase";
 import CurentUserContext from "../../components/context/CurrentUserContext";
 import "./home.css";
+import PostModal from "../posts/postModal/PostModal";
 import Posts from "../posts/Posts";
 
 const Home = () => {
@@ -26,6 +27,10 @@ const Home = () => {
     });
   }, [userObj]);
 
+  const createPostF = (showModal)=>{
+console.log(showModal);
+  }
+
   return (
     // <div>
     //     {/* <div className='userCard'>
@@ -37,7 +42,7 @@ const Home = () => {
       <Nav />
 
       <div className="post-div">
-        <div className="create-post-div">
+        <div onClick={createPostF} className="create-post-div">
           <Input placeholder="What's on your mind ?" className="post-input" />
           <Divider />
           <div className="buttons-div">
@@ -51,6 +56,8 @@ const Home = () => {
         </div>
         <Posts />
       </div>
+      <PostModal />
+      
     </div>
   );
 };

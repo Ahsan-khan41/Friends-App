@@ -18,16 +18,23 @@
 
 .parentDiv {
     /* background-color: rgb(243, 243, 243); */
-    height: 70vh;
+    height: 50vh;
     position: absolute;
     width: 100%;
+}
+
+.background-img {
+    background: rgb(235, 233, 218);
+    background: linear-gradient(90deg, rgba(235, 233, 218, 1) 0%, rgba(177, 199, 198, 1) 42%, rgba(209, 231, 181, 1) 97%);
+
 }
 
 .profile-div {
     display: flex;
     justify-content: center;
     position: relative;
-    bottom: 180px;
+    bottom: 80px;
+    left: -110px;
     /* box-sizing: border-box; */
     /* background-color: rgba(170, 190, 190, 0.212); */
     /* width: 600px; */
@@ -44,7 +51,7 @@
     /* position: relative; */
     /* top: -70px; */
     /* left: 280px; */
-    /* border: 4px solid rgb(235, 235, 235); */
+    border: 6px solid rgb(250, 250, 250);
 }
 
 .user-name {
@@ -52,9 +59,17 @@
     top: -180px; */
     /* left: 600px; */
     /* width: 100%; */
-    margin: 75px 0px 0px 30px
+    margin: 70px 0px 120px 10px;
+    color: rgb(24, 24, 24) !important;
+    padding: 16px;
+    border-radius: 50px;
+    /* background: rgb(235, 233, 218);
+    background: linear-gradient(90deg, rgba(235, 233, 218, 0.356) 0%, rgba(177, 199, 198, 0.356) 42%, rgba(209, 231, 181, 0.349) 97%); */
+    margin-bottom: 200px;
+    text-align: center;
+    width: 290px;
 }
 
-.emailHead{
+.emailHead {
     /* margin: 0 !important; */
 }

@@ -6,6 +6,7 @@ import "./userPage.css";
 import { collection, query, where, onSnapshot } from "firebase/firestore";
 import { db } from "../../components/firebase";
 import Nav from "../../components/Nav/Nav";
+
 import { Typography } from "antd";
 import UserTabs from "./userTabs/UserTabs";
 const { Title } = Typography;
@@ -32,6 +33,7 @@ const UserPage = () => {
       <Nav />
       <div className="parentDiv">
         <Image className="background-img" width={"100%"} src={userPeram.img} />
+        <div id="background-img"></div>
         <div className="profile-div">
           <Image
           style={{width:100}}
@@ -39,10 +41,10 @@ const UserPage = () => {
             className="profile-img"
             src="https://media.istockphoto.com/photos/smiling-indian-business-man-working-on-laptop-at-home-office-young-picture-id1307615661"
           />
-        </div>
-          <Title className="user-name" level={1}>
+          <Title className="user-name" level={2}>
             {userPeram.name}
           </Title>
+        </div>
 
         <UserTabs user={userPeram} />
       </div>
