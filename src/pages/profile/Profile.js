@@ -45,7 +45,7 @@ const Profile = () => {
                 setUserProfile(doc.data())
             });
         });
-    }, []);
+    }, [userObj]);
     return (
         <div>
             <Nav />

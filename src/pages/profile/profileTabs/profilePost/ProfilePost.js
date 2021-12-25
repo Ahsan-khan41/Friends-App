@@ -11,14 +11,13 @@ import CurentUserContext from '../../../../components/context/CurrentUserContext
 
 const { Meta } = Card;
 
-const ProfilePost = (props) => {
+const ProfilePost = () => {
     const userObj = useContext(CurentUserContext)
 
     const [postArr, setPostArr] = useState([]);
-    console.log(postArr, props.user);
     useEffect(() => {
 
-        const q = query(collection(db, "posts"), where("adminUid", "==", `${props.user.uid}`));
+        const q = query(collection(db, "posts"), where("adminUid", "==", `${userObj.uid}`));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const arr = [];
             querySnapshot.forEach((element) => {
@@ -26,7 +25,7 @@ const ProfilePost = (props) => {
             });
             setPostArr(arr);
         });
-    }, [props]);
+    }, [userObj]);
 
     const confirm = (e) => {
         deleteDoc(doc(db, 'posts', `${e}`));
