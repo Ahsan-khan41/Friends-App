@@ -66,10 +66,10 @@ const Profile = () => {
     return (
         <div>
             <Nav />
-            <div className="parentDiv">
+            <div style={{position:'relative'}} className="parentDiv">
                 <Image className="background-img" width={"100%"} src={userProfile.background} />
                 {/* Modal */}
-                <div style={{ position: "absolute", right: 20, bottom: 70 }}>
+                <div style={{ position: "absolute", right: 20, bottom: 60 }}>
                     <Button style={{ height: 45, borderRadius: 10 }} onClick={showModal}><CameraOutlined /> Edit Cover Photo</Button>
                     <Modal
                         style={{ textAlign: 'center' }}

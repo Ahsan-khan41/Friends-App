@@ -1,7 +1,7 @@
 .post-img {
     
-    width: 592px !important;
-    height: 411px !important;
+    width: 100%!important;
+    height: 300px !important;
     border-radius: 10px !important;
     /* margin-bottom: 20px !important; */
     margin: 5px auto !important;
@@ -11,7 +11,7 @@
 
 .post-card {
     /* background-color: rgb(228, 228, 228) !important; */
-    width: 600px !important;
+    width: 95% !important;
     border-radius: 11px !important;
     border: 1px solid #ccc !important;
     height: 100% !important;

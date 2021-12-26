@@ -13,3 +13,16 @@ margin-top: -70px;
     border: 1px solid #ccc;
     background-color: rgb(245, 245, 245);
 }
+
+@media screen and (max-width: 680px) {
+ 
+    .aboutDiv{
+        width: 400px;
+        height: 350px;
+        margin: 0px auto 20px auto;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        background-color: rgb(245, 245, 245);
+    }
+
+}

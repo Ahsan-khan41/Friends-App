@@ -49,13 +49,14 @@ const Nav = () => {
             <Affix >
             <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal" className='menu-nav' style={{ height: 55 }}   >
                 <Menu.Item >
-                    <img src={logo} />
+                    <img className='logo' src={logo} />
                     <Link to='/'></Link>
                 </Menu.Item>
                 <Menu.Item >
                     <Select showSearch={true}
                         placeholder='Search Users'
                         showArrow={false}
+                        className='searchSelect'
                         defaultActiveFirstOption={false}
                         style={{ width: '250px' }}
                         onChange={handleChange}

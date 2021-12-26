@@ -1,6 +1,21 @@
-
-.menu-nav{
+.menu-nav {
     /* background-color: aqua !important; */
     box-shadow: 0px 0px 5px 2px rgb(241, 241, 241) !important;
     padding-top: 5px !important;
+}
+
+
+
+@media screen and (max-width: 680px) {
+    body {
+        background-color: lightgreen;
+    }
+
+    .searchSelect {
+        width: 120px !important;
+    }
+
+    .logo {
+        width: 110px;
+    }
 }
