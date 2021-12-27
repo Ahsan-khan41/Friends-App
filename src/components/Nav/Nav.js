@@ -15,8 +15,7 @@ const { Option } = Select;
 const Nav = () => {
     const [users, setUsers] = useState([])
     const [current, setCurrent] = useState('home')
-    const [searchKeys, setSearchKeys] = useState('')
-    console.log('search keys = ', searchKeys)
+    const [searchKeys, setSearchKeys] = useState('z')
     let navigate = useNavigate();
 
     const handleClick = e => {
@@ -27,24 +26,12 @@ const Nav = () => {
     let userArr = [];
 
     useEffect(async () => {
-        // const querySnapshot = await getDocs(collection(db, "users"));
-        // querySnapshot.forEach((doc) => {
-        //     // doc.data() is never undefined for query doc snapshots
-        //     userArr.push(doc.data())
-        //     // console.log(doc.id, " => ", doc.data());
-        // });
-        // setUsers(userArr)
-
-
-
-
         const q = query(collection(db, "users"), where("name", ">=", searchKeys));
 
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
             userArr.push(doc.data())
-            console.log(doc.data());
         });
         setUsers(userArr)
     }, [searchKeys])
@@ -56,9 +43,21 @@ const Nav = () => {
     const children = users.map((elem, i) => {
         return <Option key={i} >{elem.name}</Option>
     })
-    // const children = ['jj', '11']
 
+    useEffect(() => {
+
+    }, [])
+    const SearchFunc = (val) => {
+        if (val === '') {
+            setSearchKeys('z')
+        } else {
+            setSearchKeys(val)
+
+        }
+    }
     return (
+
+        
         <div>
             <Affix >
                 <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal" className='menu-nav' style={{ height: 55 }}   >
@@ -72,13 +71,11 @@ const Nav = () => {
                             showArrow={false}
                             className='searchSelect'
                             defaultActiveFirstOption={false}
-                            onSearch={(val) => {
-                                setSearchKeys(val)
-                            }}
+                            onSearch={SearchFunc}
                             style={{ width: '250px' }}
                             onChange={handleChange}
                             filterOption={(input, option) => {
-                                
+
                                 return option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                             }
                             }

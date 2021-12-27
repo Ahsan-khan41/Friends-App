@@ -1,15 +1,12 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState,useEffect } from 'react'
 import { Tabs, List, Typography, Divider } from 'antd';
-import CurentUserContext from '../../../../components/context/CurrentUserContext';
-import { doc, onSnapshot, setDoc, updateDoc } from "firebase/firestore";
+import { doc, onSnapshot,  } from "firebase/firestore";
 import { db } from '../../../../components/firebase';
 
 const { Title } = Typography;
 const { TabPane } = Tabs;
-const { Paragraph } = Typography;
-const UserAbout = () => {
-    const userObj = useContext(CurentUserContext)
-    
+const UserAbout = (props) => {
+
     const [name, setName] = useState('');
     const [dob, setDob] = useState('');
     const [Mstatus, setMstatus] = useState('');
@@ -19,12 +16,12 @@ const UserAbout = () => {
     const [mobile, setMobile] = useState('');
     const [email, setEmail] = useState('');
 
-    
+
 
     useEffect(() => {
-        onSnapshot(doc(db, "users", `${userObj.uid}`), (doc) => {
+        onSnapshot(doc(db, "users", `${props.user.uid}`), (doc) => {
             if (doc.data()) {
-            
+
                 setName(doc.data().name)
                 setEmail(doc.data().email)
                 setDob(doc.data().DOB)
@@ -37,9 +34,9 @@ const UserAbout = () => {
             }
         });
 
-    }, [])
+    }, [props])
 
-   
+
 
 
     return (

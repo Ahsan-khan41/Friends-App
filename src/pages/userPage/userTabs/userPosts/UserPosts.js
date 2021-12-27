@@ -1,11 +1,9 @@
 import React, { useState, useEffect,useContext } from 'react'
-import { Row, Col } from 'antd';
-import { Card,Badge } from "antd";
-import { EditOutlined, LikeOutlined, ShareAltOutlined } from '@ant-design/icons';
-import { collection, query, where, onSnapshot, doc, arrayUnion, deleteDoc ,updateDoc} from "firebase/firestore";
+import { Card,Badge,Input,Divider,Button } from "antd";
+import { EditOutlined, LikeOutlined, ShareAltOutlined,LikeFilled,CreditCardOutlined,VideoCameraAddOutlined } from '@ant-design/icons';
+import { collection, query, where, onSnapshot, doc, arrayUnion, deleteDoc ,updateDoc,arrayRemove} from "firebase/firestore";
 import { ref, deleteObject } from "firebase/storage";
 import './user-post.css'
-import { Popconfirm } from 'antd';
 import { db, storage } from '../../../../components/firebase';
 import CurentUserContext from '../../../../components/context/CurrentUserContext';
 
@@ -46,22 +44,47 @@ const UserPosts = (props) => {
         const post = doc(db, "posts", `${element.postUid}`);
 
         // Set the "capital" field of the city 'DC'
-        updateDoc(post, {
-            like: arrayUnion(userObj.uid)
-        });
+        if ((element.like.findIndex((liked) => liked == userObj.uid)) > 0) {
+            updateDoc(post, {
+              like: arrayRemove(userObj.uid)
+            });
+          } else {
+            updateDoc(post, {
+              like: arrayUnion(userObj.uid)
+            });
+          }
     }
 
 
     return (
         <div className='userPostParent'>
+            <div className="create-post-div">
+                <Input placeholder="What's on your mind ?" className="post-input" />
+                <Divider />
+                <div className="buttons-div">
+                    <Button type="primary">
+                        <CreditCardOutlined /> Photo
+                    </Button>
+                    <Button type="primary">
+                        <VideoCameraAddOutlined /> Video
+                    </Button>
+                </div>
+            </div>
             {postArr.map((elem, index) => {
                 return (
                     <Card key={index}
                         className='post-card'
                         actions={[
                             <Badge count={elem.like.length}>
-                                <LikeOutlined style={{ width: 32 }} onClick={() => { likeHandler(elem) }} key="setting" />
-                            </Badge>,
+                            {/* {console.log((elem.like.findIndex((liked) => liked == userObj.uid)))} */}
+                            {(() => {
+                              if ((elem.like.findIndex((liked) => liked == userObj.uid)) < 0) {
+                                return <LikeOutlined style={{ width: 32 }} onClick={() => { likeHandler(elem) }} key="setting" />
+                              } else {
+                                return <LikeFilled style={{ width: 32, color: '#1890ff' }} onClick={() => { likeHandler(elem) }} key="setting" />
+                              }
+                            })()}
+                          </Badge>,
                             <EditOutlined key="edit" />,
                             <ShareAltOutlined />
 

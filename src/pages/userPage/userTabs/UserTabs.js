@@ -18,7 +18,7 @@ const UserTabs = (props) => {
             </TabPane>
             <TabPane tab={<Title level={5}>About</Title>} key="2">
                 <div className='aboutDiv'>
-                    <UserAbout />
+                    <UserAbout user={props.user} />
 
                 </div>
             </TabPane>

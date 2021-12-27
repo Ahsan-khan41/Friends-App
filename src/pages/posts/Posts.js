@@ -1,10 +1,8 @@
-import React, { useEffect, useState ,useContext} from "react";
-import Nav from "../../components/Nav/Nav";
+import React, { useEffect, useState, useContext } from "react";
 import { Card } from "antd";
 import PostModal from "./postModal/PostModal";
-import { collection, onSnapshot, updateDoc, doc, arrayUnion, deleteDoc } from "firebase/firestore";
-import { ref, deleteObject } from "firebase/storage";
-import { EditOutlined, LikeOutlined, ShareAltOutlined } from '@ant-design/icons';
+import { collection, onSnapshot, updateDoc, doc, arrayUnion, arrayRemove } from "firebase/firestore";
+import { EditOutlined, LikeOutlined, ShareAltOutlined, LikeFilled } from '@ant-design/icons';
 import { Popconfirm } from 'antd';
 import { Avatar, Badge } from 'antd';
 import CurentUserContext from "../../components/context/CurrentUserContext";
@@ -37,16 +35,22 @@ const Posts = () => {
     console.log(post);
 
     // Set the "capital" field of the city 'DC'
-    updateDoc(post, {
-      like: arrayUnion(userObj.uid)
-    });
+    if ((element.like.findIndex((liked) => liked == userObj.uid)) > 0) {
+      updateDoc(post, {
+        like: arrayRemove(userObj.uid)
+      });
+    } else {
+      updateDoc(post, {
+        like: arrayUnion(userObj.uid)
+      });
+    }
   }
 
 
-  
+
+
 
   return (
-
     <div className="post-div">
 
 
@@ -58,7 +62,14 @@ const Posts = () => {
             className="post-card"
             actions={[
               <Badge count={elem.like.length}>
-                <LikeOutlined style={{ width: 32 }} onClick={() => { likeHandler(elem) }} key="setting" />
+                {/* {console.log((elem.like.findIndex((liked) => liked == userObj.uid)))} */}
+                {(() => {
+                  if ((elem.like.findIndex((liked) => liked == userObj.uid)) < 0) {
+                    return <LikeOutlined style={{ width: 32 }} onClick={() => { likeHandler(elem) }} key="setting" />
+                  } else {
+                    return <LikeFilled style={{ width: 32, color: '#1890ff' }} onClick={() => { likeHandler(elem) }} key="setting" />
+                  }
+                })()}
               </Badge>,
               <EditOutlined key="edit" />,
               // <DeleteOutlined key="delete" onConfirm={confirm} />,
