@@ -5,7 +5,6 @@ import ModalForm from "./modalForm/ModalForm";
 
 const PostModal = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
-console.log(isModalVisible);
 // setIsModalVisible(props.value)
 const showModal = () => {
   setIsModalVisible(true);

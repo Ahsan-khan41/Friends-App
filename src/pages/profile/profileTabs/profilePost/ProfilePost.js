@@ -44,7 +44,7 @@ const ProfilePost = () => {
         const post = doc(db, "posts", `${element.postUid}`);
 
         // Set the "capital" field of the city 'DC'
-        if ((element.like.findIndex((liked) => liked == userObj.uid)) > 0) {
+        if ((element.like.findIndex((liked) => liked == userObj.uid)) >= 0) {
             updateDoc(post, {
                 like: arrayRemove(userObj.uid)
             });

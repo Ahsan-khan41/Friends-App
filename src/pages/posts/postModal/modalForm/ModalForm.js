@@ -3,7 +3,7 @@ import { Form, Input, Button, Upload, Switch } from "antd";
 import { UploadOutlined } from '@ant-design/icons';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../../../../components/firebase";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc,serverTimestamp } from "firebase/firestore";
 import { db } from "../../../../components/firebase";
 import CurentUserContext from "../../../../components/context/CurrentUserContext";
 
@@ -43,7 +43,10 @@ const ModalForm = (props) => {
             imgUrl: url,
             like: [],
             postUid: fileName,
-            adminEmail: userObj.email
+            adminEmail: userObj.email,
+            adminProfile:userObj.profile,
+            adminName:userObj.name,
+            timestamp: serverTimestamp(),
             // adminName:
           });
 
@@ -54,7 +57,7 @@ const ModalForm = (props) => {
           console.log(error)
         });
       console.log('Uploaded a blob or file!');
-      onReset()
+      
     });
 
   };
@@ -77,6 +80,7 @@ const ModalForm = (props) => {
     <div>
       <Form
         name="basic"
+        form={form}
         labelCol={{
           span: 8,
         }}
