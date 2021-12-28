@@ -5,25 +5,26 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../components/firebase";
 import { db } from "../../components/firebase";
 import { doc, setDoc } from "firebase/firestore";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const { Option } = Select;
 
 const Signup = () => {
+  let navigate = useNavigate();
 
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     console.log(values);
     createUserWithEmailAndPassword(auth, values.email, values.password)
-      .then((userCredential) => {
+      .then((userCredential)  => {
         // Signed in
         const user = userCredential.user;
         console.log(user);
         user.displayName = values.username
-        setDoc(doc(db, "users", user.uid), {
+         setDoc(doc(db, "users", user.uid), {
           name: values.username,
           email: values.email,
           uid: user.uid,
-          profile: '',
-          background: '',
+          profile: 'https://joeschmoe.io/api/v1/random',
+          background: 'https://joeschmoe.io/api/v1/random',
           mobile: values.mobileNo,
           info: '',
           DOB: values.dob._d.toDateString(),
@@ -33,11 +34,12 @@ const Signup = () => {
 
 
 
-        });
+        }).then(()=>{
 
+          navigate("/");
+          window.location.reload(false);
+        })
 
-
-        // ...
       })
       .catch((error) => {
 
@@ -52,8 +54,8 @@ const Signup = () => {
   };
 
   function onChange(value, dateString) {
-    console.log('Selected Time: ', value._d.toDateString());
-    console.log('Formatted Selected Time: ', dateString);
+    // console.log('Selected Time: ', value._d.toDateString());
+    // console.log('Formatted Selected Time: ', dateString);
   }
 
   function onOk(value) {
@@ -114,11 +116,11 @@ const Signup = () => {
             <Form.Item
               label="Status"
               name="status"
-              rules={[{ required: true, message: "Please input your Date of Birth!" }]}
+              rules={[{ required: true, message: "Please Select your gender" }]}
             >
               <Select defaultValue="Male" style={{ width: 120 }} >
                 <Option value="Male">Male</Option>
-                <Option value="Fenale">Female</Option>
+                <Option value="Female">Female</Option>
                 <Option value="Other">Other</Option>
               </Select>
             </Form.Item>
