@@ -15,7 +15,7 @@ const { Option } = Select;
 const Nav = () => {
     const [users, setUsers] = useState([])
     const [current, setCurrent] = useState('home')
-    const [searchKeys, setSearchKeys] = useState('z')
+    const [searchKeys, setSearchKeys] = useState('zzz')
     let navigate = useNavigate();
 
     const handleClick = e => {
@@ -49,7 +49,7 @@ const Nav = () => {
     }, [])
     const SearchFunc = (val) => {
         if (val === '') {
-            setSearchKeys('z')
+            setSearchKeys('zzz')
         } else {
             setSearchKeys(val)
 

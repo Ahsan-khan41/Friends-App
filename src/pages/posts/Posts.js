@@ -10,6 +10,7 @@ import CurentUserContext from "../../components/context/CurrentUserContext";
 import PostComments from "./postComments/PostComments";
 import { db } from "../../components/firebase";
 import './posts.css'
+import InputEmoji from 'react-input-emoji'
 
 const { TextArea } = Input;
 const { Title } = Typography;
@@ -19,6 +20,7 @@ const Posts = () => {
   const [form] = Form.useForm();
   const userObj = useContext(CurentUserContext)
 
+  const [text, setText] = useState('')
   const [postArr, setPostArr] = useState([]);
   const [callBack, setCallBack] = useState('[]');
 
@@ -122,7 +124,13 @@ const Posts = () => {
                                 name="postComment"
                                 rules={[{ required: true, message: 'Please Input Comment!' }]}
                               >
-                                <TextArea rows={1} />
+                                <InputEmoji
+                                  // value={text}
+                                  // onChange={setText}
+                                  // cleanOnEnter
+                                  // onEnter={handleOnEnter}
+                                  placeholder="Type a message"
+                                />
                               </Form.Item>
                               <Form.Item>
                                 <Button htmlType="submit" type="primary">

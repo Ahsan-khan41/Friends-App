@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Card, Badge,Divider,Input,Button } from "antd";
+import { Card, Badge,Divider,Input,Button,Avatar,Tooltip,Typography,Popconfirm } from "antd";
+import moment from 'moment'
 import { EditOutlined, LikeOutlined, DeleteOutlined, LikeFilled,CreditCardOutlined,VideoCameraAddOutlined } from '@ant-design/icons';
 import { collection, query, where, onSnapshot, doc, arrayUnion, deleteDoc, updateDoc, arrayRemove } from "firebase/firestore";
 import { ref, deleteObject } from "firebase/storage";
 import './profile-post.css'
-import { Popconfirm } from 'antd';
 import { db, storage } from '../../../../components/firebase';
 import CurentUserContext from '../../../../components/context/CurrentUserContext';
+import { Link } from 'react-router-dom';
 
 const { Meta } = Card;
-
+const { Title } = Typography;
 const ProfilePost = () => {
     const userObj = useContext(CurentUserContext)
 
@@ -105,7 +106,17 @@ const ProfilePost = () => {
                             />
                         }
                     >
-                        <p>Posted By : {elem.adminEmail}</p>
+                       <Link to={`/users/${elem.adminUid}`}>
+                <div style={{ display: 'flex', alignItems: 'center', marginBottom: 10 }}>
+                  <Avatar src={elem.adminProfile} size={37} />
+                  <div style={{ marginLeft: 10 }}>
+                    <Title style={{ margin: 0 }} level={5}>{elem.adminName}</Title>
+                    <Tooltip title={moment(elem.timestamp.toDate()).format('YYYY-MM-DD HH:mm:ss')}>
+                      <span style={{ color: '#616161' }}>{moment(elem.timestamp.toDate()).fromNow()}</span>
+                    </Tooltip>
+                  </div>
+                </div>
+              </Link>
                         <Meta
                             title={elem.postTitle}
                             description={elem.postDescription}
