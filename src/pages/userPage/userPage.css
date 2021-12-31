@@ -73,3 +73,15 @@
 .emailHead {
     /* margin: 0 !important; */
 }
+
+.addFriendBtn{
+    background-color: aqua;
+    height:39px;
+    width: 135px;
+    position: relative;
+    bottom: -134px;
+    left: 200px;
+    border-radius: 6px;
+    overflow: hidden;
+}
+

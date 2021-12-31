@@ -1,26 +1,39 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Menu, Affix } from 'antd';
-import { HomeFilled, UserOutlined } from '@ant-design/icons';
+import { Menu, Affix, Avatar, Typography } from 'antd';
+import { HomeFilled, BellFilled } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { Select } from 'antd';
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from '../firebase';
 import logo from './logo.svg'
+import CurentUserContext from '../context/CurrentUserContext';
+import Notifications from '../../pages/notifications/Notifications';
 import './nav.css'
 
 
 const { Option } = Select;
+const { Text } = Typography;
 
 
 const Nav = () => {
+    const userObj = useContext(CurentUserContext)
+
     const [users, setUsers] = useState([])
     const [current, setCurrent] = useState('home')
     const [searchKeys, setSearchKeys] = useState('zzz')
     let navigate = useNavigate();
 
     const handleClick = e => {
-        setCurrent(e.key);
+        setCurrent(()=>{return e.key});
+        
     };
+
+    let activUser = ''
+    let activUserName = ''
+    if (current === 'user') {
+        activUser = 'activUser';
+        activUserName = 'activUserName'
+    }
 
 
     let userArr = [];
@@ -57,7 +70,7 @@ const Nav = () => {
     }
     return (
 
-        
+
         <div>
             <Affix >
                 <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal" className='menu-nav' style={{ height: 55 }}   >
@@ -86,8 +99,12 @@ const Nav = () => {
                     <Menu.Item key="home" icon={<HomeFilled style={{ fontSize: 25, width: 70 }} />}>
                         <Link to='/'></Link>
                     </Menu.Item>
-                    <Menu.Item key="user" icon={<UserOutlined style={{ fontSize: 25, width: 70 }} />}>
+                    <Menu.Item className={activUser} style={{ width: 110, padding: 0, height: 40, position: 'absolute', right: '12%', top: 6, display: 'flex', alignItems: 'center', marginRight: 20 }} key="user" icon={<Avatar style={{ marginLeft: 10 }} size={32} src={userObj.profile} />}>
+                        <Text className={activUserName} strong>{userObj.name}</Text>
+
                         <Link to='/user'></Link>
+                    </Menu.Item>
+                    <Menu.Item style={{ position: 'absolute', right: '10%', top: 8, width: 40 }} key="notifications" icon={<BellFilled style={{ fontSize: 25, width: 70 }} />}>
                     </Menu.Item>
 
 

@@ -13,7 +13,8 @@ import CurentUserContext from "../../components/context/CurrentUserContext";
 import { Modal, Button, Avatar, Popover } from 'antd';
 import { signOut } from "firebase/auth";
 import { auth } from "../../components/firebase";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import './profile.css'
 
 const { Title } = Typography;
 
@@ -63,10 +64,14 @@ const Profile = () => {
             });
         });
     }, [userObj]);
+
+    //add friend Func
+    
+
     return (
         <div>
             <Nav />
-            <div style={{position:'relative'}} className="parentDiv">
+            <div style={{ position: 'relative' }} className="parentDiv">
                 <Image className="background-img" width={"100%"} src={userProfile.background} />
                 {/* Modal */}
                 <div style={{ position: "absolute", right: 20, bottom: 60 }}>
@@ -103,12 +108,15 @@ const Profile = () => {
                         >
                             <ProfileUpload pic={'profile'} closeFunc={handleCancel} />
                         </Modal>
+
                     </div>
                     {/* end modal */}
-                    <Title className="user-name" level={2}>
+                    <Title className="user-name" level={1}>
                         {userProfile.name}
                     </Title>
+                    
                 </div>
+
                 <ProfileTabs user={userProfile} />
             </div>
             <div style={{ position: 'fixed', bottom: 20, right: 20, cursor: 'pointer', border: '4px solid #ccc', borderRadius: '50%' }}>

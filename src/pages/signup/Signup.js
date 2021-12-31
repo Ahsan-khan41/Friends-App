@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Input, Button, DatePicker } from "antd";
+import { Form, Input, Button, DatePicker,message } from "antd";
 import { Row, Col, Select } from "antd";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../components/firebase";
@@ -35,7 +35,7 @@ const Signup = () => {
 
 
         }).then(()=>{
-
+          message.success('Account created successfully!');
           navigate("/");
           window.location.reload(false);
         })
@@ -43,7 +43,9 @@ const Signup = () => {
       })
       .catch((error) => {
 
-        // ..
+        message.error('submit failed!');
+        message.error(error.message);
+        console.log(error);
       });
 
     console.log("Success:", values);
@@ -118,7 +120,8 @@ const Signup = () => {
               name="status"
               rules={[{ required: true, message: "Please Select your gender" }]}
             >
-              <Select defaultValue="Male" style={{ width: 120 }} >
+              <Select defaultValue="Please Select Value" style={{ width: 120 }} >
+                <Option >Please Select Value</Option>
                 <Option value="Male">Male</Option>
                 <Option value="Female">Female</Option>
                 <Option value="Other">Other</Option>
