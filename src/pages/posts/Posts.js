@@ -12,7 +12,7 @@ import { db } from "../../components/firebase";
 import './posts.css'
 import InputEmoji from 'react-input-emoji'
 
-const { TextArea } = Input;
+// const { TextArea } = Input;
 const { Title } = Typography;
 const { Meta } = Card;
 const { Panel } = Collapse;
@@ -83,7 +83,7 @@ const Posts = () => {
 
 
 
-      {postArr.map((elem, index) => {
+      {postArr.slice(0).reverse().map((elem, index) => {
 
         {
           return elem.timestamp && (

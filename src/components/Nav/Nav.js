@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Menu, Affix, Avatar, Typography } from 'antd';
-import { HomeFilled, BellFilled } from '@ant-design/icons';
+import { HomeFilled } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { Select } from 'antd';
 import { collection, getDocs, query, where } from "firebase/firestore";
@@ -24,8 +24,8 @@ const Nav = () => {
     let navigate = useNavigate();
 
     const handleClick = e => {
-        setCurrent(()=>{return e.key});
-        
+        setCurrent(() => { return e.key });
+
     };
 
     let activUser = ''
@@ -99,12 +99,13 @@ const Nav = () => {
                     <Menu.Item key="home" icon={<HomeFilled style={{ fontSize: 25, width: 70 }} />}>
                         <Link to='/'></Link>
                     </Menu.Item>
-                    <Menu.Item className={activUser} style={{ width: 110, padding: 0, height: 40, position: 'absolute', right: '12%', top: 6, display: 'flex', alignItems: 'center', marginRight: 20 }} key="user" icon={<Avatar style={{ marginLeft: 10 }} size={32} src={userObj.profile} />}>
+                    <Menu.Item className={activUser} style={{ width: 110, padding: 0, height: 40, position: 'absolute', right: '4%', top: 6, display: 'flex', alignItems: 'center', marginRight: 20 }} key="user" icon={<Avatar style={{ marginLeft: 10 }} size={32} src={userObj.profile} />}>
                         <Text className={activUserName} strong>{userObj.name}</Text>
 
                         <Link to='/user'></Link>
                     </Menu.Item>
-                    <Menu.Item style={{ position: 'absolute', right: '10%', top: 8, width: 40 }} key="notifications" icon={<BellFilled style={{ fontSize: 25, width: 70 }} />}>
+                    <Menu.Item style={{ position: 'relative', left: '33%', top: 8}} key="notifications" icon={<Notifications />}>
+
                     </Menu.Item>
 
 
