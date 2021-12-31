@@ -39,7 +39,7 @@ const Nav = () => {
     let userArr = [];
 
     useEffect(async () => {
-        const q = query(collection(db, "users"), where("name", ">=", searchKeys));
+        const q = query(collection(db, "users"), where("name", ">=", searchKeys), where("name", "<=", searchKeys+ "\uf8ff"),);
 
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
