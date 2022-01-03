@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Image, Button } from "antd";
 import { useParams } from "react-router-dom";
 import { UserAddOutlined } from '@ant-design/icons';
@@ -32,6 +32,14 @@ const UserPage = () => {
   }, [params]);
 
   const addFriendFunc = async () => {
+    setDoc(doc(db, "users", `${userPeram.uid}`, "notifications", `${userObj.uid}`), {
+      name: userObj.name,
+      uid: userObj.uid,
+      profile: userObj.profile,
+      email: userObj.email,
+      status: 'pending',
+      recReqTime: serverTimestamp()
+    });
     await setDoc(doc(db, "users", `${userPeram.uid}`, "recFriendReq", `${userObj.uid}`), {
       name: userObj.name,
       uid: userObj.uid,

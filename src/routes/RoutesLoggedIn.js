@@ -6,7 +6,6 @@ import {
 } from "react-router-dom";
 
 import Home from '../pages/home/Home';
-import Posts from '../pages/posts/Posts';
 import AlreadyLoggedIn from '../components/routesComponets/AlreadyLoggedIn';
 import NotFound from '../components/routesComponets/NotFound'
 import UserPage from '../pages/userPage/UserPage';

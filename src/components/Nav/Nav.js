@@ -104,7 +104,7 @@ const Nav = () => {
 
                         <Link to='/user'></Link>
                     </Menu.Item>
-                    <Menu.Item style={{ position: 'relative', left: '33%', top: 8}} key="notifications" icon={<Notifications />}>
+                    <Menu.Item style={{ position: 'relative', left: '33%', top: 3,padding:0}} key="notifications" icon={<Notifications />}>
 
                     </Menu.Item>
 

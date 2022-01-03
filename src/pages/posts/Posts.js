@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Card, Collapse, Tooltip, Input, Form, Button, Comment, Typography } from "antd";
+import { Card, Collapse, Tooltip, Input, Form, Button, Comment, Typography,Image } from "antd";
 import PostModal from "./postModal/PostModal";
 import moment from 'moment';
 import { collection, onSnapshot, updateDoc, doc, arrayUnion, arrayRemove, setDoc, serverTimestamp } from "firebase/firestore";
@@ -21,6 +21,7 @@ const Posts = () => {
   const userObj = useContext(CurentUserContext)
 
   const [text, setText] = useState('')
+  const [loading, setLoading] = useState(false)
   const [postArr, setPostArr] = useState([]);
   const [callBack, setCallBack] = useState('[]');
 
@@ -59,6 +60,7 @@ const Posts = () => {
     setCallBack(key)
   }
   const onFinish = async (postObj, postComment) => {
+    // setLoading(true)
     let commentUid = new Date().getTime();
     const ref = doc(db, "posts", `${postObj}`, 'comments', `${commentUid}`)
     await setDoc(ref, {
@@ -75,6 +77,7 @@ const Posts = () => {
     setCallBack(postComment.postComment)
     form.resetFields();
     console.log(postObj, postComment);
+    // setLoading(false)
   }
 
 
@@ -122,7 +125,7 @@ const Posts = () => {
                               onFinish={(postComment) => { onFinish(elem.postUid, postComment) }}>
                               <Form.Item
                                 name="postComment"
-                                rules={[{ required: true, message: 'Please Input Comment!' }]}
+                                rules={[{ required: true, message: '' }]}
                               >
                                 <InputEmoji
                                   // value={text}
@@ -133,9 +136,20 @@ const Posts = () => {
                                 />
                               </Form.Item>
                               <Form.Item>
+
                                 <Button htmlType="submit" type="primary">
                                   Add Comment
                                 </Button>
+                                {/* {loading ? <Button htmlType="submit" type="primary">
+                                  loading
+                                </Button> : } */}
+                                {/* <Button htmlType="submit" type="primary">
+                                  Add Comment
+                                </Button> */}
+
+
+
+
                               </Form.Item>
                             </Form>
                           </>
@@ -154,7 +168,7 @@ const Posts = () => {
               hoverable
               style={{ border: "1px solid #ccc", margin: '10px 20px' }}
               cover={
-                < img
+                < Image
                   className="post-img"
                   alt="example"
                   src={elem.imgUrl}

@@ -10324,6 +10324,11 @@
   "resolved" "https://registry.npmjs.org/react-error-overlay/-/react-error-overlay-6.0.9.tgz"
   "version" "6.0.9"
 
+"react-icons@^4.3.1":
+  "integrity" "sha512-cB10MXLTs3gVuXimblAdI71jrJx8njrJZmNMEMC+sQu5B/BIOmlsAjskdqpn81y8UBVEGuHODd7/ci5DvoSzTQ=="
+  "resolved" "https://registry.npmjs.org/react-icons/-/react-icons-4.3.1.tgz"
+  "version" "4.3.1"
+
 "react-input-emoji@^4.0.9":
   "integrity" "sha512-IkgiaOMNXMYrSJETivEfARHYjZrZ3kVAhjKtV6htYX/cQ3wz0sOiKiGQdHOAPuBRbNdfDHr1WaWoFWT4lCJvwg=="
   "resolved" "https://registry.npmjs.org/react-input-emoji/-/react-input-emoji-4.0.9.tgz"

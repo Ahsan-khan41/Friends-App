@@ -12,6 +12,7 @@ const Signup = () => {
   let navigate = useNavigate();
 
   const onFinish = async (values) => {
+    
     console.log(values);
     createUserWithEmailAndPassword(auth, values.email, values.password)
       .then((userCredential)  => {

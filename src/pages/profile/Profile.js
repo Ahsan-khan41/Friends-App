@@ -60,6 +60,7 @@ const Profile = () => {
         );
         onSnapshot(q, (querySnapshot) => {
             querySnapshot.forEach((doc) => {
+                console.log(doc.data());
                 setUserProfile(doc.data())
             });
         });

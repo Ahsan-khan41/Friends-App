@@ -16,3 +16,19 @@
     border: 1px solid #ccc !important;
     height: 100% !important;
 }
+
+.ant-image-preview-img {
+    FONT-VARIANT: JIS90;
+    max-width: 70% !important;
+    max-height: 70% !important;
+    vertical-align: middle;
+    transform: scale3d(1, 1, 1);
+    cursor: -webkit-grab;
+    cursor: grab;
+    transition: transform 0.3s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    pointer-events: auto;
+}

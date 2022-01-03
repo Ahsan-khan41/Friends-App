@@ -28,24 +28,27 @@ const PostComments = (props) => {
   return (
     <div>
       {comments.map((elem, index) => {
-        // {console.log(elem.timestamp.toDate())}
-        return <Link to={`/users/${elem.adminUid}`}> <Comment key={index}
 
-          author={elem.adminName}
-          avatar={<Avatar src={elem.adminProfile} alt={elem.adminName} />}
+        {console.log(elem.timestamp)}
+        return  (<Link to={`/users/${elem.adminUid}`}> <Comment key={index}
 
-          content={
-            <p style={{ textAlign: 'left',color:'black' }}>
-              {elem.Comment}
-            </p>
-          }
-          datetime={
-            <Tooltip title={moment(elem.timestamp.toDate()).format('YYYY-MM-DD HH:mm:ss')}>
-              <span>{moment(elem.timestamp.toDate()).fromNow()}</span>
-            </Tooltip>
-          }
-        />
-        </Link>
+            author={elem.adminName}
+            avatar={<Avatar src={elem.adminProfile} alt={elem.adminName} />}
+
+            content={
+              <p style={{ textAlign: 'left', color: 'black' }}>
+                {elem.Comment}
+              </p>
+            }
+            datetime={
+              <Tooltip title={moment(elem.timestamp.toDate()).format('YYYY-MM-DD HH:mm:ss')}>
+                <span>{moment(elem.timestamp.toDate()).fromNow()}</span>
+              </Tooltip>
+            }
+          />
+          </Link>)
+        
+
       })}
 
     </div>

@@ -47,6 +47,7 @@ const ModalForm = (props) => {
             adminProfile:userObj.profile,
             adminName:userObj.name,
             timestamp: serverTimestamp(),
+            userObj:doc(db, `users/${userObj.uid}`)
             // adminName:
           });
 
