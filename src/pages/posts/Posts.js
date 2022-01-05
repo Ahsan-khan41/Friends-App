@@ -88,7 +88,7 @@ const Posts = () => {
 
       {postArr.slice(0).reverse().map((elem, index) => {
 
-        {
+        
           return elem.timestamp && (
             <Card key={index}
               className="post-card"
@@ -196,7 +196,7 @@ const Posts = () => {
             </Card >
 
           );
-        }
+        
 
       })}
 

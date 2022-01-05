@@ -18,7 +18,7 @@ const PostComments = (props) => {
     let arr = []
     docsSnap.forEach((doc) => {
       arr.push(doc.data())
-      console.log(doc.data()); // "doc1", "doc2" and "doc3"
+      console.log(doc.data()); 
     });
 
     setComments(arr)

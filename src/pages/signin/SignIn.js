@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, message } from "antd";
 import { Row, Col } from "antd";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../components/firebase";
@@ -8,22 +8,49 @@ import { Link, useNavigate } from "react-router-dom";
 const SignIn = () => {
   let navigate = useNavigate();
 
-  const onFinish = (values) => {
-    signInWithEmailAndPassword(auth, values.email, values.password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log(user);
-        localStorage.setItem("user", JSON.stringify(user));
+  const onFinish = async (values) => {
+    try {
+      const res = await fetch(
+        "https://apppracticeexpress.herokuapp.com/users",
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-        navigate("/");
+      const data = await res.json();
+      console.log(res);
+      console.log(data);
 
-        // ...
-      })
-      .catch((error) => {});
-    console.log("Success:", values);
+      data.map((element) => {
+        if (
+          element.user === values.email &&
+          values.email.password === values.password
+        ) {
+          signInWithEmailAndPassword(auth, values.email, values.password)
+            .then((userCredential) => {
+              // Signed in
+              const user = userCredential.user;
+              console.log(user);
+              localStorage.setItem("user", JSON.stringify(user));
+
+              navigate("/");
+
+              // ...
+            })
+            .catch((error) => {});
+          console.log("Success:", values);
+        } else {
+          message.error("user or password is incorrect");
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
-
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
