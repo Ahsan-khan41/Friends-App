@@ -8,51 +8,53 @@ import { Link, useNavigate } from "react-router-dom";
 const SignIn = () => {
   let navigate = useNavigate();
 
-  const onFinish = async (values) => {
-    try {
-      const res = await fetch(
-        "https://apppracticeexpress.herokuapp.com/users",
-        {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        }
-      );
+  const onFinish = (values) => {
+    // try {
+    // const res = await fetch(
+    //   "https://apppracticeexpress.herokuapp.com/users",
+    //   {
+    //     method: "GET",
+    //     headers: {
+    //       Accept: "application/json",
+    //       "Content-Type": "application/json",
+    //     },
+    //   }
+    // );
 
-      const data = await res.json();
-      console.log(res);
-      console.log(data);
+    // const data = await res.json();
+    // console.log(res);
+    // console.log(data);
 
-      data.map((element) => {
-        if (
-          element.user === values.email &&
-          values.email.password === values.password
-        ) {
-          signInWithEmailAndPassword(auth, values.email, values.password)
-            .then((userCredential) => {
-              // Signed in
-              const user = userCredential.user;
-              console.log(user);
-              localStorage.setItem("user", JSON.stringify(user));
+    // data.map((element) => {
+    //   if (
+    //     element.user === values.email &&
+    //     values.email.password === values.password
+    //   ) {
+    signInWithEmailAndPassword(auth, values.email, values.password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+        localStorage.setItem("user", JSON.stringify(user));
 
-              navigate("/");
+        navigate("/");
 
-              // ...
-            })
-            .catch((error) => {});
-          console.log("Success:", values);
-        } else {
-          message.error("user or password is incorrect");
-        }
-      });
-    } catch (error) {
-      console.log(error);
-    }
+        // ...
+      })
+    .catch((error) => { 
+      message.error("user or password is incorrect");
+    });
+    // console.log("Success:", values);
+    // } else {
+    //   message.error("user or password is incorrect");
+    // }
+    // });
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    // console.log("Failed:", errorInfo);
   };
   return (
     <>

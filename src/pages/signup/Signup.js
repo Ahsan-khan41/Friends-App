@@ -38,7 +38,7 @@ const Signup = () => {
         }).then(()=>{
           message.success('Account created successfully!');
           navigate("/");
-          window.location.reload(false);
+          window.location.reload(true);
         })
 
       })
